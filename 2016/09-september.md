@@ -57,3 +57,10 @@ npm config set init.author.email $email
 
 <br>
 :arrow_right: https://nodesource.com/blog/eleven-npm-tricks-that-will-knock-your-wombat-socks-off/
+
+<h1 align="center">10.09.2016</h1>
+
+### Install the latest version of a package and save with exact number
+```sh
+npm install $package@* -D -E
+```
