@@ -58,9 +58,45 @@ npm config set init.author.email $email
 <br>
 :arrow_right: https://nodesource.com/blog/eleven-npm-tricks-that-will-knock-your-wombat-socks-off/
 
-<h1 align="center">10.09.2016</h1>
+<h1 align="center">11.09.2016</h1>
 
 ### Install the latest version of a package and save with exact number
 ```sh
 npm install $package@* -D -E
+```
+
+<h1 align="center">14.09.2016</h1>
+
+## Useful Lodash utility functions
+
+### Find array values not included in the other given arrays
+```js
+_.difference([1, 2], [2, 3]);
+// => [1]
+```
+
+### Find unique values that are included in all given arrays
+```js
+_.intersection([1, 2], [2, 3]);
+// => [2]
+```
+
+### Group elements of several arrays
+```js
+_.zip(['a', 'b'], [1, 2], [true, false]);
+// => [['a', 1, true], ['b', 2, false]]
+_.zipObject(['a', 'b'], [1, 2]);
+// => { 'a': 1, 'b': 2 }
+```
+
+### Omit given properties from an object
+```js
+_.omit({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']);
+// => { 'b': '2' }
+```
+
+### Select given properties from an object
+```js
+_.pick({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']);
+// => { 'a': 1, 'c': 3 }
 ```
