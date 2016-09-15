@@ -100,3 +100,27 @@ _.omit({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']);
 _.pick({ 'a': 1, 'b': '2', 'c': 3 }, ['a', 'c']);
 // => { 'a': 1, 'c': 3 }
 ```
+
+<h1 align="center">15.09.2016</h1>
+
+### Allow click behaviour to “pass through” an element to another element below it 
+```css
+pointer-events: none;
+```
+
+## Flexbox
+
+### Behave like an inline element and lay out the content according to the flexbox model
+```css
+display: inline-flex;
+```
+
+### Align a flex's lines within the container when there is extra space on the cross-axis (used with wrap)
+```css
+align-content: flex-start;
+```
+
+### Align flex items of the current flex line overriding the align-items value
+```css
+align-self: stretch;
+```
