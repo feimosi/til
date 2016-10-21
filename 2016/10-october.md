@@ -97,7 +97,7 @@ const clone1 = Object.defineProperties({},
 Copy all own properties of an object and their attributes (writable, enumerable, ...), including getters and setters.
 `Object.assign()` and the spread operator don’t work in this case - they only consider own enumerable properties.
 
-:exclamation: Both spread and Object.assign() read values via a “get” operation. Although spread defines properties, Object.assign() sets them.
+:exclamation: Spread defines properties, Object.assign() sets them. Although both read values via a “get” operation.
 ```js
 Object.defineProperty(Object.prototype, 'foo', {
     set(value) {
@@ -114,3 +114,39 @@ SET 123
 ```
 <br>
 :arrow_right: http://www.2ality.com/2016/10/rest-spread-properties.html
+
+## Async / await
+
+```js
+async function logFetch(url) {
+  try {
+    const response = await fetch(url);
+    console.log(await response.text());
+  }
+  catch (err) {
+    console.log('fetch failed', err);
+  }
+}
+```
+
+`Body.json()` - Takes a Response stream and reads it to completion. It returns a promise that resolves with a JSON object.
+
+`Body.text()` - Returns a promise that resolves with a USVString (text).
+
+:exclamation: Calling an async function returns a promise for whatever the function returns or throws
+
+:arrow_right: https://developers.google.com/web/fundamentals/getting-started/primers/async-functions
+
+## Symbols
+
+### Search for existing symbols in a runtime-wide symbol registry with the given key 
+
+```js
+Symbol.for(key)
+```
+
+### Retrieve a shared symbol key from the global symbol registry for the given symbol
+
+```js
+Symbol.keyFor(symbol);
+```
