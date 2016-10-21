@@ -28,6 +28,8 @@ function scroll() {
 requestAnimationFrame(scroll);
 ```
 
+<h1 align="center">15.10.2016</h1>
+
 ## Watch a file for changes
 ```sh
 tail -F
@@ -64,3 +66,51 @@ ls -X
 ```sh
 git add "*.ts"
 ```
+
+<h1 align="center">21.10.2016</h1>
+
+## Git `--fixup & --autosquash`
+
+### Automatically mark your commit as a fix of some previous commit
+```sh
+git commit --fixup <commit> 
+```
+
+### Automatically organize merging these fixup commits and associated normal commits
+```sh
+git rebase -i --autosquash
+```
+
+## Regex word boundary
+```js
+/\bm/.test('moon') // matches the 'm' in "moon" ;
+```
+This is the position where a word character is not followed or preceeded by another word-character, such as between a letter and a space.
+
+## Rest/Spread Properties
+
+### True clones of objects
+```js
+const clone1 = Object.defineProperties({},
+               Object.getOwnPropertyDescriptors(obj));
+```
+Copy all own properties of an object and their attributes (writable, enumerable, ...), including getters and setters.
+`Object.assign()` and the spread operator don’t work in this case - they only consider own enumerable properties.
+
+:exclamation: Both spread and Object.assign() read values via a “get” operation. Although spread defines properties, Object.assign() sets them.
+```js
+Object.defineProperty(Object.prototype, 'foo', {
+    set(value) {
+        console.log('SET', value);
+    },
+});
+const obj = {foo: 123};
+
+> Object.assign({}, obj)
+SET 123
+{}
+> { ...obj }
+{ foo: 123 }
+```
+<br>
+:arrow_right: http://www.2ality.com/2016/10/rest-spread-properties.html
