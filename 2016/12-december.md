@@ -61,3 +61,10 @@ const partialApply = (fn, ...fixedArgs) => {
 * callbacks
 
 :arrow_right: https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36
+
+## Multi-line Padded Text 
+![](http://callmenick.com/files/2016-11/box-decoration-break-output.png)
+```css
+box-decoration-break: clone;
+```
+:arrow_right: http://callmenick.com/post/multi-line-padded-text-css-box-decoration-break
