@@ -75,3 +75,51 @@ class Twitter extends Component {
   }
 }
 ```
+
+<h1 align="center">06.01.2017</h1>
+
+## React - componentWillMount anti-pattern
+- currently `componentWillUnmount` can be called without `componentDidMount` ever being called (in case of errors)
+- `componentWillMount` is not a good place for side-effects
+- `setState` results in rerender
+- cDM of descendants is called before cDM of ancestors
+
+```js
+class Foo {
+  state = { data: null };
+  // ANTI-PATTERN
+  componentWillMount() {
+    this._subscription = GlobalStore.getFromCacheOrFetch(data => this.setState({ data: data });
+  }
+  componentWillUnmount() {
+    if (this._subscription) {
+      GlobalStore.cancel(this._subscription);
+    }
+  }
+  ...
+}
+```
+:arrow_down:
+```js
+class Foo {
+  state = { data: GlobalStore.getFromCacheOrNull() };
+  componentDidMount() {
+    if (!this.state.data) {
+      this._subscription = GlobalStore.fetch(data => this.setState({ data: data });
+    }
+  }
+  componentWillUnmount() {
+    if (this._subscription) {
+      GlobalStore.cancel(this._subscription);
+    }
+  }
+  ...
+}
+```
+
+`getInitialState` (for `createClass`), `constructor` and `componentWillMount` always happen at the same time and have the same capabilities. The only difference is that `componentWillMount` can use `this.setState` where as the others have to return or initialize the state field. Technically you can do everything you can with `getInitialState`/`constructor` still. However, there is a good practice that you don't do side-effects in those.
+
+The reason to deprecate componentWillMount is because there is a lot of confusion about how it works, and what you can safely do in it, and usually the answer is nothing. It is a life-cycle with void return so the only thing you can do is side-effects, and it is very common to use them for things like subscriptions and data fetching.
+
+:arrow_right: https://github.com/facebook/react/issues/7671
+
