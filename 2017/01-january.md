@@ -123,3 +123,30 @@ The reason to deprecate componentWillMount is because there is a lot of confusio
 
 :arrow_right: https://github.com/facebook/react/issues/7671
 
+## Angular 1 - FormController custom validators
+On the example of confirm password validation
+```js
+export default () => ({
+    require: 'ngModel',
+    scope: {
+        compareTo: '=',
+    },
+    link(scope, element, attributes, ctrl) {
+        ctrl.$validators.compareTo =
+            (modelValue) => ctrl.$isEmpty(modelValue) || modelValue === scope.compareTo;
+
+        scope.$watch('compareTo', () => {
+            ctrl.$validate();
+        });
+    },
+});
+```
+```pug
+input(type="password" name="repeatedPassword"
+      ng-model="$ctrl.repeatedPassword"
+      compare-to="$ctrl.password" required)               
+```
+
+:arrow_right: http://odetocode.com/blogs/scott/archive/2014/10/13/confirm-password-validation-in-angularjs.aspx
+
+:arrow_right: https://docs.angularjs.org/guide/forms - Custom Validation
