@@ -150,3 +150,62 @@ input(type="password" name="repeatedPassword"
 :arrow_right: http://odetocode.com/blogs/scott/archive/2014/10/13/confirm-password-validation-in-angularjs.aspx
 
 :arrow_right: https://docs.angularjs.org/guide/forms - Custom Validation
+
+<h1 align="center">08.01.2017</h1>
+
+## Reactive Programming
+Reactive programming is programming with asynchronous data streams. A stream is a sequence of ongoing events ordered in time. It can emit three different things: a value (of some type), an error, or a "completed" signal.
+
+Stream has many functions attached to it, such as `map`, `filter`, `scan`, etc. Each returns a new stream, it does not modify the original stream in any way (immutability).
+
+- `throttle`  
+```js
+Rx.Observable.prototype.throttle(windowDuration, [scheduler])
+```  
+  Returns a stream that emits only the first item emitted by the source during sequential time windows.
+
+- `debounce`  
+```js
+Rx.Observable.prototype.debounce(dueTime, [scheduler])
+```
+Emits an item from the source after a particular timespan has passed without the stream emitting any other items.
+
+- `just`  
+```js
+Rx.Observable.return(value, [scheduler])
+Rx.Observable.just(value, [scheduler])
+```
+Create an Observable that emits a particular single item.
+
+- `flatMap`  
+```js
+Rx.Observable.prototype.flatMap(selector, [resultSelector])
+
+const responseStream = requestStream
+  .flatMap(requestUrl =>
+    Rx.Observable.fromPromise(jQuery.getJSON(requestUrl))
+  );
+```
+It basically merges an observable sequence of observable sequences into a single observable sequence.
+
+- `combineLatest`  
+```js
+Rx.Observable.combineLatest(...args, [resultSelector])
+
+const source1 = Rx.Observable.interval(100).map(i => `First: ${i}`);
+const source2 = Rx.Observable.interval(150).map(i => `Second: ${i}`);
+
+const source = Rx.Observable.combineLatest(
+        source1,
+        source2,
+        (s1, s2) => `${s1}, ${s2}`
+    ).take(4);
+
+// => onNext: First: 0, Second: 0
+// => onNext: First: 1, Second: 0
+// => onNext: First: 1, Second: 1
+// => onNext: First: 2, Second: 1
+```
+Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element. 
+
+:arrow_right: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
