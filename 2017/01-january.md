@@ -282,4 +282,4 @@ Describes how whitespace inside the element is handled. Allows to preserve new l
  </tbody>
 </table>
 
-:arrow_right: https://developer.mozilla.org/en/docs/Web/CSS/white-space#Line_breaks_inside_%3Cpre%3E_elements
+:arrow_right: https://developer.mozilla.org/en/docs/Web/CSS/white-space
