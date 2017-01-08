@@ -209,3 +209,77 @@ const source = Rx.Observable.combineLatest(
 Merges the specified observable sequences into one observable sequence by using the selector function whenever any of the observable sequences produces an element. 
 
 :arrow_right: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+
+## CSS - `word-break`
+By default the browser breaks by white spaces and hyphens.
+```css
+word-break: break-word; /* same as `word-wrap: break-word` (also overflow-wrap: break-word;) */
+```
+```html
+[X] I am a text that 
+012345678901234567890123
+4567890123456789 want to
+live inside this narrow 
+paragraph.
+```
+
+```css
+word-break: break-all;
+```
+```html
+[X] I am a text that 0123
+4567890123456789012345678
+90123456789 want to live 
+inside this narrow paragr
+aph.
+```
+
+:arrow_right: https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+
+## CSS - `white-space`
+Describes how whitespace inside the element is handled. Allows to preserve new lines,	spaces and tabs.
+
+<table class="standard-table">
+ <thead>
+  <tr>
+   <th>&nbsp;</th>
+   <th>New lines</th>
+   <th>Spaces and tabs</th>
+   <th>Text wrapping</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <th><code>normal</code></th>
+   <td>Collapse</td>
+   <td>Collapse</td>
+   <td>Wrap</td>
+  </tr>
+  <tr>
+   <th><code>nowrap</code></th>
+   <td>Collapse</td>
+   <td>Collapse</td>
+   <td>No wrap</td>
+  </tr>
+  <tr>
+   <th><code>pre</code></th>
+   <td>Preserve</td>
+   <td>Preserve</td>
+   <td>No wrap</td>
+  </tr>
+  <tr>
+   <th><code>pre-wrap</code></th>
+   <td>Preserve</td>
+   <td>Preserve</td>
+   <td>Wrap</td>
+  </tr>
+  <tr>
+   <th><code>pre-line</code></th>
+   <td>Preserve</td>
+   <td>Collapse</td>
+   <td>Wrap</td>
+  </tr>
+ </tbody>
+</table>
+
+:arrow_right: https://developer.mozilla.org/en/docs/Web/CSS/white-space#Line_breaks_inside_%3Cpre%3E_elements
