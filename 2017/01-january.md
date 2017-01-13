@@ -284,6 +284,8 @@ Describes how whitespace inside the element is handled. Allows to preserve new l
 
 :arrow_right: https://developer.mozilla.org/en/docs/Web/CSS/white-space
 
+<h1 align="center">13.01.2017</h1>
+
 ## CSS Animations
 Modern browsers can animate four things really cheaply: position, scale, rotation and opacity. Thus always use `transform` / `opacity` when possible.
 
@@ -316,3 +318,26 @@ Styles that affect layout:
 - white-space
 
 :arrow_right: https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/
+
+## High-performance UI with React 
+
+We could improve the performance of our app substantially by limiting the number of props passed through the stack. We found that groups of props were often related and always changed at the same time. In these cases, it made sense to group those related props under a single “namespace” prop. If a namespace prop can be modeled as an immutable value, subsequent calls to shouldComponentUpdate can be optimized further by checking referential equality rather than doing a deep comparison.
+
+A common theme: key iteration was expensive. 
+
+Memoization of expensive computations
+
+Declarative APIs
+```jsx
+// before
+componentDidMount() {
+    this.refs.someWidget.focus()
+}
+
+// after
+render() {
+    return <Widget focused={true} />;
+}
+```
+
+:arrow_right: http://techblog.netflix.com/2017/01/crafting-high-performance-tv-user.html
