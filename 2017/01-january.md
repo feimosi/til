@@ -283,3 +283,36 @@ Describes how whitespace inside the element is handled. Allows to preserve new l
 </table>
 
 :arrow_right: https://developer.mozilla.org/en/docs/Web/CSS/white-space
+
+## CSS Animations
+Modern browsers can animate four things really cheaply: position, scale, rotation and opacity. Thus always use `transform` / `opacity` when possible.
+
+![](https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/devtools-waterfall.jpg)
+
+The higher up you start on the timeline waterfall the more work the browser has to do to get pixels on to the screen, so stay on the `Composite Layers` most of the time.
+
+Styles that affect layout:
+- width
+- height
+- padding
+- margin
+- display
+- border-width
+- border
+- top
+- position
+- font-size
+- float
+- text-align
+- overflow-y
+- font-weight
+- overflow
+- left
+- font-family
+- line-height
+- vertical-align
+- right
+- clear
+- white-space
+
+:arrow_right: https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/
