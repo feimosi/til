@@ -341,3 +341,65 @@ render() {
 ```
 
 :arrow_right: http://techblog.netflix.com/2017/01/crafting-high-performance-tv-user.html
+
+<h1 align="center">14.01.2017</h1>
+
+## `require.ensure`
+The method ensures that every dependency in dependencies can be synchronously required when calling the callback. callback has no parameter.
+
+```js
+require.ensure(["module-a", "module-b"], function() {
+  var a = require("module-a");
+  // ...
+});
+```
+Note: require.ensure only loads the modules, it doesn’t evaluate them.
+
+## Webpack 2
+```js
+const config = {
+  module: {
+    rules: [{
+      test: /.css$/,
+      use: ['style-loader', {
+        loader: 'css-loader',
+        options: {
+          modules: true
+        }
+      }],
+      include: PATHS.style
+    }
+  ]},
+  resolve: {
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules'
+    ],
+    alias: {
+      Utilities: path.resolve(__dirname, 'src/utilities/'),
+    },
+    extensions: ['.js', '.json', '.jsx']
+  }
+};
+```
+
+Given it's not a good idea to bundle everything as JavaScript (FOUC, performance), there are plugins like **ExtractTextPlugin**
+
+Loaders:
+- css-loader - Resolves @import and url(...)
+- style-loader - Attaches rules to document, implements HMR
+- extract-text-webpack-plugin - Extracts text from bundle to a file → Separate CSS (avoids FOUC)
+- url-loader - Inlines loads assets to JavaScript
+- file-loader - Returns file paths and emits files
+- image-webpack-loader - Minifies images using imagemin
+- webpack-spritesmith - Converts images into a spritesheet using spritesmith
+- svg-inline-loader - Inlines SVG as a module
+
+Improving Build Speed
+- include aggressively at loaders to avoid work
+- Use combination of module.noParse and resolve.alias against minified files to avoid work during development
+
+Devtool: 
+'eval' is a good default for development. source-map for production.
+
+:arrow_right: https://presentations.survivejs.com/advanced-webpack/
