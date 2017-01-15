@@ -403,3 +403,105 @@ Devtool:
 'eval' is a good default for development. source-map for production.
 
 :arrow_right: https://presentations.survivejs.com/advanced-webpack/
+
+<h1 align="center">15.01.2017</h1>
+
+## HTML tips
+
+To handle semantics properly, pick your heading rank in sequential order, 
+
+```html
+<article>
+    <h1>Monkey Island</h1>
+    <h2>Look behind you! A three-headed monkey!</h2>
+    <!-- ... -->
+</article>
+```
+
+To create subheadings or tag lines to accompany headings use regular text markup rather than a lower-rank heading.
+
+```html
+<header>
+    <h1>Star Wars VII</h1>
+    <p>The Force Awakens</p>
+</header>
+```
+
+Placeholders are meant to show examples of formatting valid for a field.
+
+```html
+<input type="email" placeholder="darth.vader@empire.gov" name="mail">
+```
+
+Pick the correct type for <input> elements.
+- type="number" 
+- type="email"
+- type="tel"
+
+SVG sprites to implement vector icons is much better than using Web Fonts – which is a hack: 
+- browsers treat Web Font icons as text
+- ad blockers can disabe the download of fonts
+
+```html
+<svg>
+    <symbol id="social-twitter" viewBox="...">
+        <!-- actual image data here -->
+    </symbol>
+</svg>
+...
+<svg class="social-icon">
+    <use xlink:href="icons.svg#social-twitter" />
+</svg>
+```
+
+:arrow_right: https://hacks.mozilla.org/2016/08/a-few-html-tips/
+
+## CSS
+
+### CSS Specificity:
+- Type selectors (e.g., h1) and pseudo-elements (e.g., :before).
+- Class selectors (e.g., .example), attributes selectors (e.g., [type="radio"]) and pseudo-classes (e.g., :hover).
+- ID selectors (e.g., #example).
+
+### Feature Queries
+```css
+@supports ( display: flex ) {
+  .foo { display: flex; }
+}
+```
+
+### Native Variables (Custom Properties)
+
+```css
+:root {
+  --theme-colour: cornflowerblue;
+}
+
+h1 { color: var(--theme-colour); }  
+a { color: var(--theme-colour); }  
+```
+
+### Pure CSS Tooltips
+
+```css
+.tooltip::after {
+  content: attr(data-tooltip);
+}
+```
+
+### CSS Counters
+
+```css
+.container {
+	counter-reset: issues 0 examples 0;
+}
+
+.issue:before {
+	counter-increment: issues 1;
+	content: "Issue " counter(issues, decimal);
+}
+```
+
+:arrow_right: https://bitsofco.de/3-new-css-features-to-learn-in-2017/
+
+:arrow_right: https://www.sitepoint.com/8-clever-tricks-with-css-functions/
