@@ -505,3 +505,14 @@ a { color: var(--theme-colour); }
 :arrow_right: https://bitsofco.de/3-new-css-features-to-learn-in-2017/
 
 :arrow_right: https://www.sitepoint.com/8-clever-tricks-with-css-functions/
+
+<h1 align="center">16.01.2017</h1>
+
+## DevTools tips
+
+- `$$(selector)` — select all the elements
+- `document.body.contentEditable = true` — edit the HTML anywhere in the DOM
+- `getEventListeners($(selector))` — find events associated with an Element in the DOM
+- `monitorEvents($(selector), eventName)` — monitor the event associated with the element
+- `$_` — retrieve the value of your last result
+
