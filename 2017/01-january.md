@@ -516,3 +516,75 @@ a { color: var(--theme-colour); }
 - `monitorEvents($(selector), eventName)` — monitor the event associated with the element
 - `$_` — retrieve the value of your last result
 
+<h1 align="center">17.01.2017</h1>
+
+## Optimizing React 
+
+Performance optimization process should look like this:
+- Realise there is a performance issue
+- Measure using DevTools and analyze to find the bottleneck
+- Work around the issue
+- Test again to confirm an improvement
+- Goto 2 if needed
+
+### Profiling Components with Chrome Timeline  
+http://localhost:3000/?react_perf
+
+### `shouldComponentUpdate`, `PureComponent`
+Should only be used for:
+- components that use simple props (no deep objects or arrays in props)
+- "leaf"-components or components located deep in the rendering tree. By bailing out of rendering high in the component tree, you might miss a required re-render further down the tree since it will skip rendering for all child components.
+
+### Move expensive code to a higher level component
+Off-loading these calculations to a higher-level component or memoizing the result. Using libraries like reselect can be a huge help.
+
+### Don’t abuse this.setState
+If you don’t use something in render(), it shouldn't be in the state.
+
+:arrow_right: https://medium.com/@okonetchnikov/react-at-60fps-4e36b8189a4c
+
+## React Context
+
+```jsx
+export default class ScrollPane extends Component {
+  static contextTypes = {
+    registerPane: PropTypes.func.isRequired,
+    unregisterPane: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    this.context.registerPane(this.el)
+  }
+
+  componentWillUnmount() {
+    this.context.unregisterPane(this.el)
+  }
+
+  render() {...}
+}
+
+export default class ScrollContainer extends Component {
+
+  static childContextTypes = {
+    registerPane: PropTypes.func,
+    unregisterPane: PropTypes.func
+  }
+
+  getChildContext() {
+    return {
+      registerPane: this.registerPane,
+      unregisterPane: this.unregisterPane
+    }
+  }
+
+  panes = []
+
+  registerPane = (node) => {
+    if (!this.findPane(node)) {
+      this.addEvents(node)
+      this.panes.push(node)
+    }
+  }
+  ...
+}
+```
