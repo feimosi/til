@@ -588,3 +588,17 @@ export default class ScrollContainer extends Component {
   ...
 }
 ```
+
+<h1 align="center">16.01.2017</h1>
+
+## JavaScript's `void` operator
+
+This operator allows inserting expressions that produce side effects into places where an expression that evaluates to undefined is desired. It's often used merely to obtain the undefined primitive value (using `void 0`).
+
+When a browser follows a javascript: URI, it evaluates the code in the URI and then replaces the contents of the page with the returned value, unless the returned value is undefined. 
+
+```html
+<a href="javascript:void(document.body.style.backgroundColor='green');">
+  Click here for green background
+</a>
+```
