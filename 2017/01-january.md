@@ -589,7 +589,7 @@ export default class ScrollContainer extends Component {
 }
 ```
 
-<h1 align="center">16.01.2017</h1>
+<h1 align="center">20.01.2017</h1>
 
 ## JavaScript's `void` operator
 
