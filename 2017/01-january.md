@@ -602,3 +602,84 @@ When a browser follows a javascript: URI, it evaluates the code in the URI and t
   Click here for green background
 </a>
 ```
+
+<h1 align="center">21.01.2017</h1>
+
+## Optimizing react-redux
+
+Rendering a list of some elements in a page is a common task for almost any web-app and here's a way to improve performance for that case.
+
+```js
+const targets = this.state.targets.map((target) => {
+  return <Target key={target.id} target={target}/>;
+});
+```
+
+### Don’t update unchanged elements
+
+```js
+class Target extends React.Component {
+    shouldComponentUpdate(newProps) {
+        return this.props.target !== newProps.target;
+    }
+    ...
+}
+```
+
+### Make child components smarter
+
+Don’t update the parent component if a list has the same number of elements and order of elements is the same.
+
+```js
+shouldComponentUpdate(newProps, newState) {
+    // check if order or length of list is changed
+    // if all ids are the same it means no "significant" changes
+    const changed = newState.targets.find((target, i) => {
+        return this.state.targets[i].id !== target.id;
+    });
+    return changed;
+}
+```
+
+Children components should update itself if data is changed.
+
+```js
+store.subscribe(() => {
+    const newTarget = store.getState().targets[this.props.index];
+    if (newTarget !== this.state.target) {
+	this.setState({
+	    target: newTarget
+	});
+    }
+});
+```
+
+### Change state shape
+
+```js
+const state = {
+  targets: [{id: 'target1', radius: 10}, {id: 'target2', radius: 2}]
+};
+```
+:arrow_down:
+```js
+const state = {
+  targetsOrder: ['id-1', 'id-2'],
+  targets: {
+    'id-1': { id: 'id-1', radius: 10 },
+    'id-2': { id: 'id-2', radius: 20 },
+  }
+};
+```
+
+In this case, we're passing item's ID into child view, not the whole item. Thus "TargetView" can not be a "dumb" component. It should be connected to the store:
+
+```js
+const TargetView = connect(
+  (state, ownProps) => ({target: state.targets[ownProps.targetId]})
+)(({ target }) => {
+  return <Circle radius={target.radius} />;
+});
+```
+
+:arrow_right: https://medium.com/@lavrton/optimizing-react-redux-store-for-high-performance-updates-3ae6f7f1e4c1
