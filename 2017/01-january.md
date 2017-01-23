@@ -683,3 +683,120 @@ const TargetView = connect(
 ```
 
 :arrow_right: https://medium.com/@lavrton/optimizing-react-redux-store-for-high-performance-updates-3ae6f7f1e4c1
+
+<h1 align="center">21.01.2017</h1>
+
+## Applying Functional Thinking 
+
+Given:
+```js
+function averageSalary(employees, minSalary, department){
+  var total = 0
+  var count = 0
+  _.each(employees, function(e){
+    if(minSalary < e.salary && (department == undefined || department.works(e))){
+      total += e.salary
+      count += 1
+    }
+  })
+  return (count == 0) ? 0 : total / count
+}
+```
+If we just added another condition, the signature of the function (thus, the public interface) would have to change, and the if statement would grow.
+
+### Use Functions Instead of Simple Values
+
+```js
+function and(predicates) {
+  return e => _.every(predicates, p => p(e))
+}
+function averageSalary(employees, conditions) {
+  let total = 0
+  let count = 0
+  _.each(employees, function(e) {
+    if(and(conditions)(e)){
+      total += e.salary
+      count += 1
+    }
+  })
+  return (count == 0) ? 0 : total / count
+}
+```
+
+### Model Data Transformations as a Pipeline
+
+```js
+function averageSalary(employees, conditions){
+  const filtered = _.filter(employees, and(conditions))
+  const salaries = _.map(filtered, 'salary')
+  const total = _.reduce(salaries, (a, b) => a + b, 0)
+  return (salaries.length == 0) ? 0 : total / salaries.length
+}
+```
+
+### Extract Generic Functions
+
+```js
+function average(nums){
+  var total = _.reduce(nums, function(a,b){return a + b}, 0)
+  return (nums.length == 0) ? 0 : total / nums.length
+}
+
+function employeeSalaries(employees, conditions){
+  var filtered = _.filter(employees, and(conditions))
+  return _.pluck(filtered, 'salary')
+}
+
+function averageSalary(employees, conditions){
+  return average(employeeSalaries(employees, conditions))
+}
+```
+
+:arrow_right: https://nulogy.com/who-we-are/company-blog/articles/functional-js/
+
+## Angular component's `require` property
+
+```js
+angular
+  .module('app', [])
+  .component('parentComponent', {
+    transclude: true,
+    template: `<div ng-transclude></div>`,
+    controller() {
+      this.foo = () => 'Foo from parent!';
+    }
+  })
+  .component('childComponent', {
+    require: {
+      parent: '^parentComponent'
+    },
+    controller() {
+      this.$onInit = () => {
+        this.state = this.parent.foo();
+      };
+    },
+    template: `<div>Component! {{ $ctrl.state }}</div>`
+  });
+
+document.addEventListener('DOMContentLoaded', function () {
+  angular.bootstrap(document, ['app']);
+});
+```
+
+:arrow_right: https://toddmotto.com/on-init-require-object-syntax-angular-component/
+
+## Inlining Web Workers
+
+```js
+function createWorker(workerFunc) {
+  if (! (workerFunc instanceof Function)) {
+    throw new Error('Argument must be function');
+  }
+  const src = `(${workerFunc})();`;
+  const blob = new Blob([src], {type: 'application/javascript'});
+  const url = URL.createObjectURL(blob);
+  return new Worker(url);    
+}
+```
+
+:arrow_right: http://www.2ality.com/2017/01/messagechannel.html
