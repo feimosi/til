@@ -684,7 +684,7 @@ const TargetView = connect(
 
 :arrow_right: https://medium.com/@lavrton/optimizing-react-redux-store-for-high-performance-updates-3ae6f7f1e4c1
 
-<h1 align="center">21.01.2017</h1>
+<h1 align="center">23.01.2017</h1>
 
 ## Applying Functional Thinking 
 
@@ -800,3 +800,52 @@ function createWorker(workerFunc) {
 ```
 
 :arrow_right: http://www.2ality.com/2017/01/messagechannel.html
+
+<h1 align="center">24.01.2017</h1>
+
+## Symbol.iterator
+
+```js
+var myIterable = {}
+myIterable[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+[...myIterable] // [1, 2, 3]
+```
+
+```js
+var someString = new String("hi"); // need to construct a String object explicitly to avoid auto-boxing
+
+someString[Symbol.iterator] = () => {
+  return {
+    next() {
+      if (this._first) {
+        this._first = false;
+        return { value: "bye", done: false };
+      } else {
+        return { done: true };
+      }
+    },
+    _first: true
+  };
+};
+```
+
+Some statements and expressions are expecting iterables, for example the for-of loops, spread operator, yield*, and destructuring assignment.
+
+```js
+for(let value of ["a", "b", "c"]){
+    console.log(value);
+}
+
+[..."abc"];
+
+function* gen(){
+  yield* ["a", "b", "c"];
+}
+gen().next();
+
+[a, b, c] = new Set(["a", "b", "c"]);
+```
