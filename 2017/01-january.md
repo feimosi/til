@@ -849,3 +849,18 @@ gen().next();
 
 [a, b, c] = new Set(["a", "b", "c"]);
 ```
+
+<h1 align="center">27.01.2017</h1>
+
+## CSS: `position: sticky`
+
+Allows you to fix an element to the viewport (i.e, anchor it to the top of the screen) but only when its parent is visible in the viewport and it is within the threshold value. When it is not fixed to the viewport, the element will act like it is position: relative. 
+
+```css
+h3 {
+  position: sticky;
+  top: 10px; /* from the top of the viewport */
+}
+```
+
+:arrow_right: https://developers.google.com/web/updates/2016/12/position-sticky
