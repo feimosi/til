@@ -864,3 +864,40 @@ h3 {
 ```
 
 :arrow_right: https://developers.google.com/web/updates/2016/12/position-sticky
+
+<h1 align="center">29.01.2017</h1>
+
+## ECMAScript 2017
+
+- Async Functions
+- Shared memory and atomics
+- Object.values/Object.entries
+- String padding
+- Object.getOwnPropertyDescriptors()
+- Trailing commas in function parameter lists and calls
+
+`padStart` (repeatedly) prefixes the receiver with fillString, until its length is maxLength.
+
+```js
+String.prototype.padStart(maxLength, fillString = ' ')
+
+> 'x'.padStart(5, 'ab')
+'ababx'
+
+String.prototype.padEnd(maxLength, fillString = ' ')
+
+> 'x'.padEnd(4, 'ab')
+'xaba'
+
+String.prototype.startsWith(searchString, position = 0)
+
+> 'To be, or not to be'.startsWith('To be'));
+true
+
+Object.entries(object)
+
+> Object.entries({ one: 1, two: 2 })
+[ [ 'one', 1 ], [ 'two', 2 ] ]
+```
+
+:arrow_right: http://www.2ality.com/2016/02/ecmascript-2017.html
