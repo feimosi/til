@@ -47,3 +47,21 @@ It's a shorthand for `flex-direction` and `flex-wrap`
 Specifies how an image element is fitted into the box established by its height and width.
 
 :arrow_right: https://css-tricks.com/lets-look-50-interesting-css-properties-values/
+
+## HTML5 Input Datalist for Autocomplete Dropdowns
+
+```html
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags" list="languages">
+    <datalist id="languages">
+        <option>ActionScript</option>
+        <option>AppleScript</option>
+        <option>Asp</option>
+        <option>BASIC</option>
+        <option>C</option>
+    </datalist>
+</div>
+```
+
+:arrow_right: https://developer.mozilla.org/en/docs/Web/HTML/Element/datalist
