@@ -228,3 +228,35 @@ Links:
 - Show :link, :visited, :focus, :hover, :active
 
 :arrow_right: https://marcysutton.com/links-vs-buttons-in-modern-web-applications/
+
+## Regex
+
+Positive lookahead
+```js
+const pattern = /\d+(?= dollars)/u;
+const result = pattern.exec('42 dollars');
+// → result[0] === '42'
+```
+
+Negative  lookahead
+```js
+const pattern = /\d+(?! dollars)/u;
+const result = pattern.exec('42 pesos');
+// → result[0] === '42'
+```
+
+Positive lookbehind
+```js
+const pattern = /(?<=\$)\d+/u;
+const result = pattern.exec('$42');
+// → result[0] === '42'
+```
+
+Negative lookbehind
+```js
+const pattern = /(?<!\$)\d+/u;
+const result = pattern.exec('€42');
+// → result[0] === '42'
+```
+
+:arrow_right: https://mathiasbynens.be/notes/es-regexp-proposals
