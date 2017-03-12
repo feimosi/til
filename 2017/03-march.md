@@ -214,3 +214,40 @@ const Page = () => {
   );
 };
 ```
+
+:arrow_right: https://hackernoon.com/10-react-mini-patterns-c1da92f068c5#.wkr2ib210
+
+<h1 align="center">12.03.2017</h1>
+
+## Cancellable promise wrapper
+
+```js
+const makeCancelable = (promise) => {
+  let hasCanceled_ = false;
+
+  const wrappedPromise = new Promise((resolve, reject) => {
+    promise.then((val) =>
+      hasCanceled_ ? reject({isCanceled: true}) : resolve(val)
+    );
+    promise.catch((error) =>
+      hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+    );
+  });
+
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled_ = true;
+    },
+  };
+};
+```
+
+## Git merge conflicts
+
+The contents from a specific side of the merge can be checked out of the index by using `--ours` or `--theirs`.  
+```sh
+git checkout --theirs conflict.txt
+git add conflict.txt
+git commit
+```
