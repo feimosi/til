@@ -251,3 +251,28 @@ git checkout --theirs conflict.txt
 git add conflict.txt
 git commit
 ```
+
+<h1 align="center">14.03.2017</h1>
+
+## Normalizer functions
+
+Normalizer functions can be used in many cases where you have logic that’s gated with an if-statement.
+
+```js
+function normalizeToPx(from, parentValue) {
+  if(from.unit === 'px') {
+    return from;
+  }
+ 
+  return {
+    value: (from.value / 100) * parentValue,
+    unit: 'px'
+  };
+}
+
+// ...
+
+totalPixelWidth += normalizeToPx(foo, parentSize).value;
+```
+
+:arrow_right: https://codeutopia.net/blog/2017/02/28/simplify-your-javascript-code-with-normalizer-functions/
