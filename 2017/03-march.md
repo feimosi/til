@@ -276,3 +276,29 @@ totalPixelWidth += normalizeToPx(foo, parentSize).value;
 ```
 
 :arrow_right: https://codeutopia.net/blog/2017/02/28/simplify-your-javascript-code-with-normalizer-functions/
+
+<h1 align="center">19.03.2017</h1>
+
+## DOMParser vs Range.createContextualFragment()
+
+> A DocumentFragment is a minimal document object that has no parent. It is used as a light-weight version of document to store well-formed or potentially non-well-formed fragments of XML.
+
+`DOMParser` can parse XML or HTML source stored in a string into a DOM Document
+
+```js
+const createNode = html =>
+  new DOMParser().parseFromString(stringContainingHTMLSource, "text/html").body.firstChild;
+```
+
+The `Range.createContextualFragment()` method returns a DocumentFragment by invoking the HTML fragment parsing algorithm with the start of the range (the parent of the selected node) as the context node.
+
+```js
+const createNode = html =>
+  document.createRange().createContextualFragment(html).firstElementChild
+```
+
+:exclamation: `DOMParser` is more compute expensive and generates a much heavier objects, so the performance difference is noticeable.
+
+:arrow_right: https://twitter.com/bdc/status/835084223010734080  
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/Range/createContextualFragment  
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/DOMParser  
