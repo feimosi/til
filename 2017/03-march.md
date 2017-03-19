@@ -287,7 +287,7 @@ totalPixelWidth += normalizeToPx(foo, parentSize).value;
 
 ```js
 const createNode = html =>
-  new DOMParser().parseFromString(stringContainingHTMLSource, "text/html").body.firstChild;
+  new DOMParser().parseFromString(html, "text/html").body.firstChild;
 ```
 
 The `Range.createContextualFragment()` method returns a DocumentFragment by invoking the HTML fragment parsing algorithm with the start of the range (the parent of the selected node) as the context node.
