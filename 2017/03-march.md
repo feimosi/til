@@ -302,3 +302,57 @@ const createNode = html =>
 :arrow_right: https://twitter.com/bdc/status/835084223010734080  
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/Range/createContextualFragment  
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/DOMParser  
+
+<h1 align="center">22.03.2017</h1>
+
+## CSS Grid
+
+### Fixed
+
+```css
+.fixed {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 4px;
+}
+```
+
+### Fluid
+
+```css
+.fluid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: .25rem;
+}
+```
+
+### Responsive
+
+```css
+.responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-gap: .25rem;
+}
+```
+
+### Place on a specific column / row
+
+```css
+.element:nth-child(3) {
+  grid-column: 4 / 4;
+  grid-row: 3 / 4;
+}
+```
+
+### Span across multiple columns / rows
+
+```css
+.element:nth-child(3) {
+  grid-column: 2 / span 3;
+  grid-row: 2 / span 4;
+}
+```
+
+:arrow_right: https://youtu.be/16enLRDbOyY?list=PLo3w8EB99pqJJEL63RsaRcmArRsSuKu04
