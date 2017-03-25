@@ -356,3 +356,38 @@ const createNode = html =>
 ```
 
 :arrow_right: https://youtu.be/16enLRDbOyY?list=PLo3w8EB99pqJJEL63RsaRcmArRsSuKu04
+
+<h1 align="center">26.03.2017</h1>
+
+## DOM Keyboard Input
+
+For this legacy API, we use the three properties of KeyboardEvent: `keyCode`, `charCode` and `which`. Properties don’t have the same meaning when handling a key event (keydown or keyup) versus a character event (keypress). `keyCode` on key events tries to be international-friendly (non-dependent on the logical layout)
+
+```js
+document.addEventListener('keypress', event => 
+  console.log('keypress: ', event.key, event.code, event.keyCode))
+
+document.addEventListener('keyup', event => 
+  console.log('keyup: ', event.key, event.code, event.keyCode))
+
+keypress:  ф KeyA 1092
+keyup:  ф KeyA 65 
+
+keypress:  a KeyA 97
+keyup:  a KeyA 65 
+
+String.fromCharCode(97)
+"a"
+
+String.fromCharCode(65)
+"A"
+```
+
+The new API [UI Events](https://w3c.github.io/uievents/) brings two new very useful properties to a KeyboardEvent event: `key` and `code`. 
+
+The property `key` is almost a direct replacement for the previously used `which`, except it’s a lot more predictable.
+When the pressed key is a printable character, you get the character in string form. When the pressed key is not a printable character you get a multi-character descriptive string, like 'Backspace', 'Control', 'Enter', 'Tab'.
+
+`code` gives you the physical key that was pressed, in a string form. This means it’s totally independent of the keyboard layout that is being used.
+
+:arrow_right: https://hacks.mozilla.org/2017/03/internationalize-your-keyboard-controls/
