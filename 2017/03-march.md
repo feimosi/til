@@ -361,7 +361,19 @@ const createNode = html =>
 
 ## DOM Keyboard Input
 
-For this legacy API, we use the three properties of KeyboardEvent: `keyCode`, `charCode` and `which`. Properties don’t have the same meaning when handling a key event (keydown or keyup) versus a character event (keypress). `keyCode` on key events tries to be international-friendly (non-dependent on the logical layout)
+### Old approach
+
+In the legacy API, we use the three properties of KeyboardEvent: `keyCode`, `charCode` and `which`. Properties don’t have the same meaning when handling a key event (keydown or keyup) versus a character event (keypress). `keyCode` on key events tries to be international-friendly (non-dependent on the logical layout).
+
+### New approach
+
+The new API [UI Events](https://w3c.github.io/uievents/) brings two new very useful properties to a KeyboardEvent object: `key` and `code`. 
+
+The property `key` is almost a direct replacement for the previously used `which`, except it’s a lot more predictable.
+When the pressed key is a printable character, you get the character in string form. When the pressed key is not a printable character you get a multi-character descriptive string, like 'Backspace', 'Control', 'Enter', 'Tab'.
+
+`code` gives you the physical key that was pressed, in a string form. This means it’s totally independent of the keyboard layout that is being used.
+
 
 ```js
 document.addEventListener('keypress', event => 
@@ -383,11 +395,40 @@ String.fromCharCode(65)
 "A"
 ```
 
-The new API [UI Events](https://w3c.github.io/uievents/) brings two new very useful properties to a KeyboardEvent event: `key` and `code`. 
+### Cross-browser usage
 
-The property `key` is almost a direct replacement for the previously used `which`, except it’s a lot more predictable.
-When the pressed key is a printable character, you get the character in string form. When the pressed key is not a printable character you get a multi-character descriptive string, like 'Backspace', 'Control', 'Enter', 'Tab'.
+```js
+window.addEventListener('keydown', function(e) {
+  // We don't want to mess with the browser's shortcuts
+  if (e.defaultPrevented ||
+      e.ctrlKey || e.altKey || e.metaKey || e.shiftKey) {
+    return;
+  }
 
-`code` gives you the physical key that was pressed, in a string form. This means it’s totally independent of the keyboard layout that is being used.
+  // We try to use `code` first because that's the layout-independent property.
+  // Then we use `key` because some browsers, notably Internet Explorer and
+  // Edge, support it but not `code`. Then we use `keyCode` to support older
+  // browsers like Safari, older Internet Explorer and older Chrome.
+  switch (e.code || e.key || e.keyCode) {
+    case 'KeyW': // This is 'W' on QWERTY keyboards, but 'Z' on AZERTY keyboards
+    case 'w':
+    case 119: // keyCode for 'w' 
+    case 'ArrowUp':
+    case 38: // keyCode for arrow up
+      changeDirectionUp();
+      break;
+
+    // ...
+  }
+});
+```
 
 :arrow_right: https://hacks.mozilla.org/2017/03/internationalize-your-keyboard-controls/
+
+## Create an array containing numbers 1 to N
+
+```js
+Array.from(Array(10), (e, i) => i)
+
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
