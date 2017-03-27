@@ -432,3 +432,31 @@ Array.from(Array(10), (e, i) => i)
 
 // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
+
+<h1 align="center">27.03.2017</h1>
+
+## Equality algorithms
+
+### Strict equality using ===
+
+If the values have different types, the values are considered unequal. Otherwise, if they have the same type and are not numbers, they're considered equal if they have the same value. Finally, if both values are numbers, they're considered equal if they're both not NaN and are the same value, or if one is +0 and one is -0.
+
+> For numbers it uses slightly different semantics to gloss over two different edge cases. The first is that floating point zero is either positively or negatively signed. This is useful in representing certain mathematical solutions, but as most situations don't care about the difference between +0 and -0, strict equality treats them as the same value. The second is that floating point includes the concept of a not-a-number value, NaN, to represent the solution to certain ill-defined mathematical problems: negative infinity added to positive infinity, for example.
+
+Also used by `Array.prototype.indexOf`, `Array.prototype.lastIndexOf` and case-matching.
+
+### Same-value equality
+
+Determines whether two values are functionally identical in all contexts. It's provided by the Object.is method.
+
+```js
+Object.is(NaN, NaN)
+> true
+
+Object.is(-0, 0)
+> false
+```
+
+### Same-value-zero equality
+
+Similar to same-value equality, but considered +0 and -0 equal. Used by `TypedArray` and `ArrayBuffer` constructors, as well as `Map` and `Set` operations, and `includes` method.
