@@ -460,3 +460,90 @@ Object.is(-0, 0)
 ### Same-value-zero equality
 
 Similar to same-value equality, but considered +0 and -0 equal. Used by `TypedArray` and `ArrayBuffer` constructors, as well as `Map` and `Set` operations, and `includes` method.
+
+<h1 align="center">29.03.2017</h1>
+
+> Get into the habit of testing for the existence of a property rather than the truthiness of a property, even though they’re the same thing 99% of the time. `if ('fetch' in window)` rather than `if (window.fetch)`.
+
+> Do not use float to store currency. You will loose precision and data. You should store it as a integer number of cents and then convert prior to output.
+
+```js
+var number = 123456.789;
+
+number.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+// → 123.456,79 €
+
+console.log(number.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' }))
+// → ￥123,457
+
+console.log(number.toLocaleString('en-IN', { maximumSignificantDigits: 3 }));
+// → 1,23,000
+
+console.log(new Intl.NumberFormat('de-DE').format(number));
+// → 123.456,789
+
+// Arabic in most Arabic speaking countries uses real Arabic digits
+console.log(new Intl.NumberFormat('ar-EG').format(number));
+// → ١٢٣٤٥٦٫٧٨٩
+```
+
+### Only send polyfills to browsers that need them
+
+```js
+import loadPolyfills from './loadPolyfills';
+import mountApp from './mountApp'; // the entry point for the rest of my app
+
+loadPolyfills().then(mountApp);
+```
+```js
+import 'core-js/es6/promise';
+
+export default function loadPolyfills() {
+  const fillFetch = () => new Promise((resolve) => {
+    if ('fetch' in window) return resolve();
+
+    require.ensure([], () => {
+      require('whatwg-fetch');
+
+      resolve();
+    }, 'fetch');
+  });
+
+  const fillIntl = () => new Promise((resolve) => {
+    if ('Intl' in window) return resolve();
+
+    require.ensure([], () => {
+      require('intl');
+      require('intl/locale-data/jsonp/en.js');
+
+      resolve();
+    }, 'Intl');
+  });
+
+  const fillCoreJs = () => new Promise((resolve) => {
+    if (
+      'startsWith' in String.prototype &&
+      'endsWith' in String.prototype &&
+      'includes' in Array.prototype &&
+      'assign' in Object &&
+      'keys' in Object
+    ) return resolve();
+
+    require.ensure([], () => {
+      require('core-js');
+
+      resolve();
+    }, 'core-js');
+  });
+
+  return Promise.all([
+    fillFetch(),
+    fillIntl(),
+    fillCoreJs()
+  ]);
+}
+```
+
+At build-time, Webpack will create your normal bundle, plus three more bundles: fetch.js, Intl.js and core-js.js (although I can’t get this working in Webpack 2.2, I just get 0.js, 1.js, 2.js). When you code runs in the browser, Webpack will fetch these files if it needs to, before executing the rest of your app’s code.
+
+:arrow_right: https://hackernoon.com/polyfills-everything-you-ever-wanted-to-know-or-maybe-a-bit-less-7c8de164e423
