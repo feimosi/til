@@ -31,6 +31,17 @@ Is used as a disclosure widget from which the user can retrieve additional infor
 >  <p>More info about the details.</p>
 > </details>
 
+### `<wbr>`
+
+Represents a word break opportunity—a position within text where the browser may optionally break a line, though its line-breaking rules would not otherwise create a break at that location.
+
+```html
+<p>http://this<wbr>.is<wbr>.a<wbr>.really<wbr>.long<wbr>.example<wbr>.com/With
+<wbr>/deeper<wbr>/level<wbr>/pages<wbr>/deeper<wbr>/level<wbr>/pages<wbr></p>
+
+some.very.long<wbr>@email.com
+```
+
 ## Promise finally
 
 ```js
