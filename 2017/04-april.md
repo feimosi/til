@@ -52,3 +52,48 @@ new Promise((resolve, reject) => {
   .catch(_ => console.log('fail'))
   .then(_ => console.log('finally'))
 ```
+
+<h1 align="center">11.04.2017</h1>
+
+## DOM
+
+### clientHeight:
+
+Returns the height of the visible area for an object, in pixels. The value contains the height with the padding, but it does not include the scrollBar, border, and the margin.
+
+### offsetHeight:
+
+Returns the height of the visible area for an object, in pixels. The value contains the height with the padding, scrollBar, and the border, but does not include the margin.
+
+So, offsetHeight includes scrollbar and border, clientHeight doesn't.
+
+### [`Document.elementFromPoint()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint)
+
+Returns the topmost element at the specified coordinates.
+
+```js
+elem = document.elementFromPoint(2, 2);
+elem.style.color = newColor;
+```
+
+### [`Window.getComputedStyle()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
+
+Gives the values of all the CSS properties of an element after applying the active stylesheets and resolving any basic computation those values may contain.
+
+```js
+var elem = document.getElementById("elem-container");
+var theCSSprop = window.getComputedStyle(elem,null).getPropertyValue("height");
+document.getElementById("output").innerHTML = theCSSprop;
+```
+
+The values returned by getComputedStyle are known as resolved values. These are usually the same as the CSS 2.1 computed values, but for some older properties like width, height or padding, they are instead the used values. 
+
+### [`Window.getSelection()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection)
+
+Returns a Selection object representing the range of text selected by the user or the current position of the caret.
+
+```js
+var selObj = window.getSelection(); 
+var selRange = selObj.getRangeAt(0);
+var selectedText = selObj.toString();
+```
