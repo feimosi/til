@@ -97,3 +97,27 @@ var selObj = window.getSelection();
 var selRange = selObj.getRangeAt(0);
 var selectedText = selObj.toString();
 ```
+
+<h1 align="center">23.04.2017</h1>
+
+## CSS
+
+### Modern clearfix
+
+CSS now has a way to cause elements to clear floats. We set the value of display to flow-root and our floated box is cleared.
+
+Old approach:
+```css
+.container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+```
+
+New approach:
+```css
+.container {
+  display: flow-root;
+}
+```
