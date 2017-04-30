@@ -121,3 +121,25 @@ New approach:
   display: flow-root;
 }
 ```
+
+<h1 align="center">30.04.2017</h1>
+
+## React Performance Tips
+
+### `render()` function
+- do as little work as possible in the `render` function. If it is necessary to perform complex operations or calculations, consider moving them to a memoized function so that duplicate results can be cached
+
+### State and props
+- avoid storing easily computable values in a component’s state
+- React will trigger a re-render anytime a prop (or state) value is not equal to the previous value. With this in mind, it is important to be mindful of situations where it’s possible to inadvertently cause a performance hit by creating new values for props or state each render cycle (e.g. function binding, Object or Array literals, fallback /default values)
+- keep Props (and State) as simple and minimal as possible
+
+### Component methods
+- since component methods are created for each instance of a component, if possible, use either pure functions from a helper/util module or static class methods. This makes a noticeable difference especially in cases where there are a large number of a component being rendered in the app.
+
+### Advanced
+- in almost all cases, React.PureComponent is a better choice than React.Component. When creating new components, try building it as a pure component first and only if the component's functionality requires, use React.Component
+- component Performance Profiling (in Chrome) with `?react_perf` as a query string
+- certain common events can fire extremely rapidly, e.g. ‘scroll’, ‘resize’. It is wise to debounce these events, especially if the event handler is performing anything more than extremely basic functionality
+
+:arrow_right: https://blog.vixlet.com/react-at-light-speed-78cd172a6411
