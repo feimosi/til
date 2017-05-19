@@ -30,3 +30,17 @@ console.log(parsedUrl.searchParams.get("id")); // 123
 ```
 
 :arrow_right: https://developer.mozilla.org/en/docs/Web/API/URL
+
+<h1 align="center">20.04.2017</h1>
+
+## React
+
+### HOC to conditionally render components
+
+![](https://pbs.twimg.com/media/DAJOO8UUIAAvsf3.jpg:large)
+
+## CSS
+
+### Switching from display none to block with a CSS transition
+
+![](https://pbs.twimg.com/media/DANxOXjV0AAcxXT.png)
