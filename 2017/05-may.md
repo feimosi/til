@@ -44,3 +44,36 @@ console.log(parsedUrl.searchParams.get("id")); // 123
 ### Switching from display none to block with a CSS transition
 
 ![](https://pbs.twimg.com/media/DANxOXjV0AAcxXT.png)
+
+<h1 align="center">21.04.2017</h1>
+
+## Web API
+
+### [Window.matchMedia()](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia)
+
+Returns a new MediaQueryList object representing the parsed results of the specified media query string.
+
+```js
+if (window.matchMedia("(min-width: 400px)").matches) {
+  /* the viewport is at least 400 pixels wide */
+} else {
+  /* the viewport is less than 400 pixels wide */
+}
+```
+```js
+componentDidMount() {
+  const mql = window.matchMedia('(min-width: 768px)');
+  this.mqListener(mql);
+  mql.addListener(this.mqListener);
+}
+  
+mqListener = (mq) => {
+  if (mq.matches) {
+    obj.setState({ smallScreen: false });
+    obj.setState({ sidebarOpened: true });
+  } else {
+    obj.setState({ smallScreen: true });
+    obj.setState({ sidebarOpened: false });
+  }
+};
+```
