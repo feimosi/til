@@ -1,4 +1,4 @@
-<h1 align="center">09.04.2017</h1>
+<h1 align="center">09.05.2017</h1>
 
 ## Web API
 
@@ -31,7 +31,7 @@ console.log(parsedUrl.searchParams.get("id")); // 123
 
 :arrow_right: https://developer.mozilla.org/en/docs/Web/API/URL
 
-<h1 align="center">20.04.2017</h1>
+<h1 align="center">20.05.2017</h1>
 
 ## React
 
@@ -45,7 +45,7 @@ console.log(parsedUrl.searchParams.get("id")); // 123
 
 ![](https://pbs.twimg.com/media/DANxOXjV0AAcxXT.png)
 
-<h1 align="center">21.04.2017</h1>
+<h1 align="center">21.05.2017</h1>
 
 ## Web API
 
