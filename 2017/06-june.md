@@ -37,3 +37,25 @@ An efficient strategy is to reduce at minimum the appearance of undefined keywor
 - avoid the usage of sparse arrays
 
 :arrow_right: https://rainsoft.io/7-tips-to-handle-undefined-in-javascript/
+
+<h1 align="center">17.06.2017</h1>
+
+## CSS `quotes`
+
+The `quotes` property in CSS allows you to specify which types of quotes are used when quotes are added via the `content: open-quote` or `content: close-quote` rules. 
+
+```css
+q {
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+q:before {
+    content: open-quote;
+}
+
+q:after {
+    content: close-quote;
+}
+```
+
+:arrow_right: https://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/
