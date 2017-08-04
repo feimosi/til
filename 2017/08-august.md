@@ -38,4 +38,4 @@ text-indent: 5em each-line;
 text-indent: 5em hanging;
 ```
 
-:arrow_right: https://github.com/feimosi/til/edit/master/2017/08-august.md
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
