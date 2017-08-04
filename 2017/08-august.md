@@ -25,3 +25,17 @@ const entries = urlParams.entries();
 ```
 
 `URLSearchParams` reminds the `classList` API - very simple methods yet very useful.
+
+## CSS
+
+### `text-indent`
+
+The text-indent CSS property specifies the amount of indentation (empty space) that is put before lines of text in a block. By default, this controls the indentation of only the first formatted line of the block, but the hanging and each-line keywords can be used to change this behavior.
+
+```css
+text-indent: 3mm;
+text-indent: 5em each-line;
+text-indent: 5em hanging;
+```
+
+:arrow_right: https://github.com/feimosi/til/edit/master/2017/08-august.md
