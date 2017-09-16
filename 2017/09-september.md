@@ -99,3 +99,26 @@ Once a value has been set the `:invalid` pseudo-class will be dropped. You can o
 ```
 
 :arrow_right: https://stackoverflow.com/questions/5805059/how-do-i-make-a-placeholder-for-a-select-box/8442831#8442831
+
+## Run Promises sequentially
+
+```js
+list.reduce((prev, element) =>
+  prev.then(partial =>
+  	makePromise(element).then(result => [...partial, result])
+  ), 
+  Promise.resolve([])
+)
+.then(results => console.log(results));
+```
+
+## `crypto.getRandomValues`
+
+Lets you get cryptographically strong random values. The array given as the parameter is filled with random numbers (random in its cryptographic meaning).
+
+```js
+var array = new Uint32Array(10);
+window.crypto.getRandomValues(array);
+```
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues
