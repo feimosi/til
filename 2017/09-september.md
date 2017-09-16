@@ -64,3 +64,38 @@ console.log('ä'.localeCompare('a', 'de', { sensitivity: 'base' })); // 0: ä ha
 ```
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+
+<h1 align="center">16.09.2017</h1>
+
+## `GlobalEventHandlers.oncontextmenu`
+
+An event handler property for right-click events on the window. Unless the default behavior is prevented (see examples below on how to do this), the browser context menu will activate (though IE8 has a bug with this and will not activate the context menu if a contextmenu event handler is defined).
+
+```js
+window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+}, false);
+```
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/oncontextmenu
+
+## Make a placeholder for a `<select>` box
+
+When the select element is required it allows use of the `:invalid` CSS pseudo-class which allows you to style the select element when in it's "placeholder" state. `:invalid` works here because of the empty value in the placeholder option.
+
+Once a value has been set the `:invalid` pseudo-class will be dropped. You can optionally also use `:valid` if you so wish.
+
+```html
+<style>
+    select:invalid { color: gray; }
+</style>
+<form>
+    <select required>
+        <option value="" disabled selected hidden>Please Choose...</option>
+        <option value="0">First</option>
+        <option value="1">Second</option>
+    </select>
+</form>
+```
+
+:arrow_right: https://stackoverflow.com/questions/5805059/how-do-i-make-a-placeholder-for-a-select-box/8442831#8442831
