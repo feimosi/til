@@ -122,3 +122,13 @@ window.crypto.getRandomValues(array);
 ```
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues
+
+<h1 align="center">25.09.2017</h1>
+
+## CSS `flex-flow`
+
+A shorthand property for flex-direction and flex-wrap individual properties.
+```css
+flex-flow: row nowrap;
+flex-flow: column wrap;
+```
