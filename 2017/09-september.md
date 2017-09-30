@@ -132,3 +132,51 @@ A shorthand property for flex-direction and flex-wrap individual properties.
 flex-flow: row nowrap;
 flex-flow: column wrap;
 ```
+
+<h1 align="center">30.09.2017</h1>
+
+## React 16 Portals
+
+```jsx
+class Overlay extends Component {
+  constructor(props) {
+    super(props);
+    this.overlayContainer = document.createElement('div');
+    document.body.appendChild(this.overlayContainer);
+  }
+
+  componentWillUnmount() {
+    document.body.removeChild(this.overlayContainer);
+  }
+
+  render() {
+    return ReactDOM.createPortal(
+      <div className="overlay">
+        <button onClick={ this.props.onClose }>x</button>
+        { this.props.children }
+      </div>,
+      this.overlayContainer
+    )
+  }
+}
+
+class App extends Component {
+  state = {
+    overlayActive: true,
+  };
+ 
+  render() {
+    return (
+      <div>
+        { this.state.overlayActive &&
+          <Overlay onClose={ () => this.setState({ overlayActive: false }) }>
+            <h2>Start editing to see some magic happen {'\u2728'}</h2>
+          </Overlay>
+        }
+      </div>
+    );
+  }
+};
+
+render(<App />, document.getElementById('root'));
+```
