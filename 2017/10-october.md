@@ -1,6 +1,6 @@
 <h1 align="center">05.10.2017</h1>
 
-## Redux `createReducer()`
+## Redux `createReducer()` util
 
 Switch statements come with too much boilerplate of their own.
 The idea is to ditch the switch and move towards a more functional approach.
@@ -45,3 +45,12 @@ export default createReducer(initialState.globalSearchState, actionHandlers);
 
 :arrow_right: https://medium.freecodecamp.org/reducing-the-reducer-boilerplate-with-createreducer-86c46a47f3e2
 
+## CSS `ch` unit
+
+When defining widths of text blocks the `ch` unit may come in handy since 1ch is equivalent to the width of the zero (0) character - glyph "0". It also changes as the font-family or font-size changes.
+
+```cs
+p {
+  max-width: 65ch;  /* Maximum width of 65characters */
+}
+```
