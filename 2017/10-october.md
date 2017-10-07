@@ -36,7 +36,8 @@ import createReducer from '../futils/newcreatereducer';
 
 const actionHandlers = {
   GLOBAL_SEARCH: (state, action) => Object.assign({}, state, { results: action.results }),
-  UPDATE_GLOBAL_SEARCH_STRING: (state, action) => Object.assign({}, state, { searchString: action.searchString, isLoading: true }),
+  UPDATE_GLOBAL_SEARCH_STRING: (state, action) =>
+    Object.assign({}, state, { searchString: action.searchString, isLoading: true }),
   IS_LOADING: (state, action) => Object.assign({}, state, { isLoading: action.bool })
 };
 
@@ -54,3 +55,17 @@ p {
   max-width: 65ch;  /* Maximum width of 65characters */
 }
 ```
+
+<h1 align="center">07.10.2017</h1>
+
+## `tr` command
+
+Translate characters - run replacements based on single characters and character sets.
+
+Replace all occurrences of a character in a file, and print the result:
+
+```sh
+tr {{find_characters}} {{replace_characters}} < {{filename}}
+```
+
+:arrow_right: https://tldr.ostera.io/tr
