@@ -68,4 +68,10 @@ Replace all occurrences of a character in a file, and print the result:
 tr {{find_characters}} {{replace_characters}} < {{filename}}
 ```
 
+Replace spaces with new lines:
+
+```sh
+pacman -Su | tr ' ' '\n'
+```
+
 :arrow_right: https://tldr.ostera.io/tr
