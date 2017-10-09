@@ -75,3 +75,23 @@ pacman -Su | tr ' ' '\n'
 ```
 
 :arrow_right: https://tldr.ostera.io/tr
+
+<h1 align="center">09.10.2017</h1>
+
+## `scp` command
+
+Secure copy - copy files between hosts using Secure Copy Protocol over SSH.
+
+Copy a local file to a remote host:
+
+```sh
+scp load-tests/files/{ocr-back.png,ocr-front.png} aws@10.100.10.100:/home/load-tests/
+```
+
+Copy a file from a remote host to a local folder:
+
+```sh
+scp aws@10.100.10.100:/home/load-tests/artillery.json artillery-aws.json
+```
+
+:arrow_right: https://tldr.ostera.io/scp
