@@ -25,8 +25,8 @@ console.log(url.href); // "http://www.example.com/d%C3%A9monstration.html"
 ### Get the search params from the current window's URL
 
 ```js
-var parsedUrl = new URL(window.location.href);
-console.log(parsedUrl.searchParams.get("id")); // 123
+const parsedUrl = new URL(window.location.href);
+console.log(parsedUrl.searchParams.get('id')); // 123
 ```
 
 :arrow_right: https://developer.mozilla.org/en/docs/Web/API/URL
