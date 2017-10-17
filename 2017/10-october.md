@@ -95,3 +95,15 @@ scp aws@10.100.10.100:/home/load-tests/artillery.json artillery-aws.json
 ```
 
 :arrow_right: https://tldr.ostera.io/scp
+
+<h1 align="center">17.10.2017</h1>
+
+## Page smooth scroll
+
+The [`Element.scrollIntoView()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView) method scrolls the element on which it's called into the visible area of the browser window.
+
+```js
+const element = document.getElementById("box");
+
+element.scrollIntoView({ behavior: "smooth", block: "start" });
+```
