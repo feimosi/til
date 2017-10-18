@@ -127,3 +127,43 @@ element.scrollIntoView({ behavior: "smooth", block: "start" });
 ```
 
 :arrow_right: https://eduardoboucas.com/blog/2017/09/25/svg-clip-path-logo-colour.html
+
+## CSS Grid Template Areas
+
+```css
+.container {
+  display: grid;
+  width: 100%;
+  height: 600px;
+  grid-template-columns: 200px 1fr 1fr;
+  grid-template-rows: 80px 1fr 1fr 100px;
+  grid-gap: 1rem;
+  grid-template-areas:
+      "header header header"
+      "sidebar content-1 content-1"
+      "sidebar content-2 content-3"
+      "footer footer footer";
+}
+```
+
+```html
+<div class="container">
+  <div class="header">header</div>
+  <div class="sidebar">sidebar</div>
+  <div class="content-1">Content-1</div>
+  <div class="content-2">Content-2</div>
+  <div class="content-3">Content-3</div>
+  <div class="footer">footer</div>
+</div>
+```
+
+```css
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.content-1 { grid-area: content-1; }
+.content-2 { grid-area: content-2; }
+.content-3 { grid-area: content-3; }
+.footer { grid-area: footer; }
+```
+
+:arrow_right: https://mozilladevelopers.github.io/playground/08-template-areas
