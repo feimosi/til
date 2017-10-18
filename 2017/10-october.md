@@ -107,3 +107,23 @@ const element = document.getElementById("box");
 
 element.scrollIntoView({ behavior: "smooth", block: "start" });
 ```
+
+<h1 align="center">18.10.2017</h1>
+
+## SVG clip-path
+
+```svg
+<svg>
+  <defs>
+    <clipPath id="logo-main-mask">
+      <rect x="0" y="0" width="200" height="120" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#logo-main-mask)">          
+    <use xlink:href="#logo"/>
+  </g>
+</svg>
+```
+
+:arrow_right: https://eduardoboucas.com/blog/2017/09/25/svg-clip-path-logo-colour.html
