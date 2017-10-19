@@ -167,3 +167,37 @@ element.scrollIntoView({ behavior: "smooth", block: "start" });
 ```
 
 :arrow_right: https://mozilladevelopers.github.io/playground/08-template-areas
+
+## Function composition alternative
+
+```js
+function using(data) {
+  return {
+    do(func) {
+      return using(func(data))
+    },
+    value() {
+      return data
+    },
+  }
+}
+```
+
+```js
+const example = using(response)
+  .do(something)
+  .do(somethingElse)
+  .do(oneMoreThing)
+  
+const result = using(response)
+  .do(parseData)
+  .do(getOnlyAdults)
+  .do(mapWithArticles(articles))
+  .do(R.sortBy(R.prop('name')))
+  .value()
+
+ctx.send(result)
+```
+
+:arrow_right: https://github.com/InventiStudio/using-js
+
