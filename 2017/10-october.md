@@ -201,3 +201,40 @@ ctx.send(result)
 
 :arrow_right: https://github.com/InventiStudio/using-js
 
+<h1 align="center">21.10.2017</h1>
+
+## W3C Resource Hints
+
+### [DNS Prefetch](https://w3c.github.io/resource-hints/#dns-prefetch)
+
+The dns-prefetch link relation type is used to indicate an origin that will be used to fetch required resources, and that the user agent SHOULD resolve as early as possible.
+
+```html
+<link rel="dns-prefetch" href="//example.com">
+```
+
+### [Preconnect](https://w3c.github.io/resource-hints/#preconnect)
+
+The preconnect link relation type is used to indicate an origin that will be used to fetch required resources. Initiating an early connection, which includes the DNS lookup, TCP handshake, and optional TLS negotiation, allows the user agent to mask the high latency costs of establishing a connection.
+
+```html
+<link rel="preconnect" href="//example.com">
+<link rel="preconnect" href="//cdn.example.com" crossorigin>
+```
+
+### [Prefetch](https://w3c.github.io/resource-hints/#prefetch)
+
+The prefetch link relation type is used to identify a resource that might be required by the next navigation, and that the user agent SHOULD fetch, such that the user agent can deliver a faster response once the resource is requested in the future.
+
+```html
+<link rel="prefetch" href="//example.com/next-page.html" as="html" crossorigin="use-credentials">
+<link rel="prefetch" href="/library.js" as="script">
+```
+
+### [Prerender](https://w3c.github.io/resource-hints/#prerender)
+
+The prerender link relation type is used to identify a resource that might be required by the next navigation, and that the user agent SHOULD fetch and execute, such that the user agent can deliver a faster response once the resource is requested in the future.
+
+```html
+<link rel="prerender" href="//example.com/next-page.html">
+```
