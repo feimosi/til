@@ -238,3 +238,16 @@ The prerender link relation type is used to identify a resource that might be re
 ```html
 <link rel="prerender" href="//example.com/next-page.html">
 ```
+
+<h1 align="center">23.10.2017</h1>
+
+## `use strict` and arrow functions
+
+`use strict` does not affect `this` value inside arrow functions. Given that this is lexical, strict mode rules with regard to this are just ignored.
+
+```js
+const f = () => { 'use strict'; return this; };
+f() === window; // true
+```
+
+:arrow_right: https://stackoverflow.com/a/36427989/7350152
