@@ -251,3 +251,29 @@ f() === window; // true
 ```
 
 :arrow_right: https://stackoverflow.com/a/36427989/7350152
+
+
+<h1 align="center">24.10.2017</h1>
+
+## Save `canvas` as image
+
+The `HTMLCanvasElement.toBlob()` method creates a Blob object representing the image contained in the canvas. This file may be cached on the disk or stored in memory at the discretion of the user agent. If type is not specified, the image type is image/png. 
+
+```js
+const canvas = document.getElementById('canvas');
+
+canvas.toBlob((blob) => {
+  const newImg = document.createElement('img');
+  const url = URL.createObjectURL(blob);
+
+  newImg.onload = function() {
+    // no longer need to read the blob so it's revoked
+    URL.revokeObjectURL(url);
+  };
+
+  newImg.src = url;
+  document.body.appendChild(newImg);
+});
+```
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
