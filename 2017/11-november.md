@@ -61,3 +61,32 @@ private drawOnCanvas(
 ```
 
 :arrow_right: https://medium.com/@tarik.nzl/creating-a-canvas-component-with-free-hand-drawing-with-rxjs-and-angular-61279f577415
+
+<h1 align="center">04.11.2017</h1>
+
+## CSS Heading with a stroke line
+
+```css
+h2 {
+  color: white;
+  line-height: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 100;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+h2:before,
+h2:after {
+  background: white;
+  display: block;
+  height: 2px;
+  width: 100%;
+  content: '';
+}
+```
+
+:arrow_right: https://codepen.io/wesbos/pen/OONNKX
