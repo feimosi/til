@@ -90,3 +90,22 @@ h2:after {
 ```
 
 :arrow_right: https://codepen.io/wesbos/pen/OONNKX
+
+## Wrap the generator in an iterable
+
+To allow multiple iterations, wrap the generator function in an iterable that creates a new instance every time:
+
+```js
+const wrapGenerator = (gen) => (...args) => ({
+  [Symbol.iterator]: () => gen(...args)
+});
+
+const wrappedGenerator = wrapGenerator(gen);
+
+const printTwice = (it) => {
+  console.log(Array.from(it));
+  console.log(Array.from(it));
+};
+
+printTwice(wrappedGenerator());
+```
