@@ -109,3 +109,11 @@ const printTwice = (it) => {
 
 printTwice(wrappedGenerator());
 ```
+
+<h1 align="center">0511.2017</h1>
+
+## Flow `Shape<T>` type
+
+Matches the shape of T. React uses `$Shape` in the signatures for `setProps` and `setState`.
+
+An object of type `$Shape<T>` does not have to have all of the properties that type T defines. But the types of the properties that it does have must match the types of the same properties in T.
