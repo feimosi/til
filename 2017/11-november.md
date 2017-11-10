@@ -110,10 +110,62 @@ const printTwice = (it) => {
 printTwice(wrappedGenerator());
 ```
 
-<h1 align="center">0511.2017</h1>
+<h1 align="center">05.11.2017</h1>
 
 ## Flow `Shape<T>` type
 
 Matches the shape of T. React uses `$Shape` in the signatures for `setProps` and `setState`.
 
 An object of type `$Shape<T>` does not have to have all of the properties that type T defines. But the types of the properties that it does have must match the types of the same properties in T.
+
+<h1 align="center">10.11.2017</h1>
+
+## Flow `ReadOnly<T>` type
+
+Makes all properties on objects read-only. 
+
+`$ReadOnly<{ a: number, b: string }>` behaves as if you wrote `{ +a: number, +b: string }`.
+
+```ts
+type O = { a: number, b: string };
+
+function fn(o: $ReadOnly<O>) {
+  o.a = 42; // Error!
+}
+```
+
+## React Portal in a separate window
+
+```jsx
+class MyWindowPortal extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    // STEP 1: create a container <div>
+    this.containerEl = document.createElement('div');
+    this.externalWindow = null;
+  }
+  
+  render() {
+    // STEP 2: append props.children to the container <div> that isn't mounted anywhere yet
+    return ReactDOM.createPortal(this.props.children, this.containerEl);
+  }
+
+  componentDidMount() {
+    // STEP 3: open a new browser window and store a reference to it
+    this.externalWindow = window.open('', '', 'width=600,height=400,left=200,top=200');
+
+    // STEP 4: append the container <div> (that has props.children appended to it) 
+    // to the body of the new window
+    this.externalWindow.document.body.appendChild(this.containerEl);
+  }
+
+  componentWillUnmount() {
+    // STEP 5: This will fire when this.state.showWindowPortal 
+    // in the parent component becomes false.
+    // So we tidy up by closing the window
+    this.externalWindow.close();
+  }
+}
+```
+
+:arrow_right: https://hackernoon.com/using-a-react-16-portal-to-do-something-cool-2a2d627b0202
