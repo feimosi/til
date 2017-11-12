@@ -169,3 +169,22 @@ class MyWindowPortal extends React.PureComponent {
 ```
 
 :arrow_right: https://hackernoon.com/using-a-react-16-portal-to-do-something-cool-2a2d627b0202
+
+<h1 align="center">12.11.2017</h1>
+
+## `accept` attribute in `<input type="file" />`
+
+The `accept` attribute is a hint to browsers to only show files that are allowed for the current input. While it can typically be overridden by users, it helps narrow down the results for users by default.
+
+```html
+<h1>Match all image files (image/*)</h1>
+<label>image/* <input type="file" accept="image/*"></label>
+
+<h1>Match all video files (video/*)</h1>
+<label>video/* <input type="file" accept="video/*"></label>
+
+<h1>Match all image files (image/*) and files with the extension ".someext"</h1>
+<label>.someext,image/* <input type="file" accept=".someext,image/*"></label>
+```
+
+:arrow_right: https://stackoverflow.com/a/10503561/7350152
