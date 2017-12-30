@@ -95,3 +95,27 @@ $i: 6;
   $i: $i - 2;
 }
 ```
+
+<h1 align="center">30.12.2017</h1>
+
+## Sort strings containing numbers
+
+Apart from lexical sorting, Javascript supports comparison using locales, and that supports handling numbers in a more natural way.
+
+```js
+["item11", "item10", "item9"].sort((a, b) => 
+  a.localeCompare(b, undefined, { numeric: true })
+);
+// ["item9","item10","item11"]
+```
+
+If you need to sort in multiple places, it's better to specify the parameters of localeCompare in one place instead of copy-pasting it. This is what Collator is for. 
+
+```js
+const collator = new Intl.Collator(undefined, {numeric: true});
+
+["item11", "item10", "item9"].sort(collator.compare);
+// ["item9","item10","item11"]
+```
+
+:arrow_right: https://gist.run/?id=f6ef497f9bfd281b22e66694639a488e
