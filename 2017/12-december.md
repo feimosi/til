@@ -119,3 +119,34 @@ const collator = new Intl.Collator(undefined, {numeric: true});
 ```
 
 :arrow_right: https://gist.run/?id=f6ef497f9bfd281b22e66694639a488e
+
+<h1 align="center">31.12.2017</h1>
+
+## Proxy requests in Express.js
+
+```js
+app.post('/api/*', function(req, res) {
+  const url = `${API_URL}${req.url}`;
+  req.pipe(request.post(url, { json: req.body })).pipe(res);
+});
+```
+
+## Detect platform in Angular Universal
+
+```ts
+import { PLATFORM_ID, Inject, Injectable } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+@Injectable()
+export class Service {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: string,
+  ) {}
+
+  private method() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Browser-specific code
+    }
+  }
+}
+```
