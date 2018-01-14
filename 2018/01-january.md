@@ -52,3 +52,24 @@ const { day, month, year } = patter.exec("30.04.2017").groups;
 ```
 
 :arrow_right: https://dev.to/kayis/javascripts-regular-expressions-get-more-power-4m4j
+
+<h1 align="center">14.01.2017</h1>
+
+## MouseEvent's coordinates
+
+The MouseEvent object has several properties that indicate the position where the event happened. The primary distinction between them is the coordinate system they use:
+
+- `offsetX/Y` have the coordinates relative to the target element
+- `pageX/Y` are to the document
+- `screenX/Y` are to the screen
+- `clientX/Y` are to the viewport
+
+### Get the coordinates relative to another element
+
+The key is to get the element's coordinates in the same coordinate system as the event position. The simplest solution is to use `.getBoundingClientRect()` which uses viewport coordinates, the same as `clientX/Y`.
+
+```js
+const { top, left } = element.getBoundingClientRect();
+const eventTop = event.clientY - top;
+const eventLeft = event.clientX - left;
+```
