@@ -73,3 +73,19 @@ const { top, left } = element.getBoundingClientRect();
 const eventTop = event.clientY - top;
 const eventLeft = event.clientX - left;
 ```
+
+<h1 align="center">15.01.2017</h1>
+
+## Resize images
+
+With imagemagick
+
+```sh
+magick convert old.png -resize 50% new.png
+```
+
+The `mogrify` command is in many ways like `convert` except it is designed to modify images in place.
+
+```sh
+mogrify -resize 50% *.png
+```
