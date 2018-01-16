@@ -89,3 +89,14 @@ The `mogrify` command is in many ways like `convert` except it is designed to mo
 ```sh
 mogrify -resize 50% *.png
 ```
+
+<h1 align="center">16.01.2017</h1>
+
+## Angular: window scroll listener
+
+```ts
+@HostListener('window:resize', []) handleWindowResize() {
+  // ...
+}
+```
+
