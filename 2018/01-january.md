@@ -100,3 +100,26 @@ mogrify -resize 50% *.png
 }
 ```
 
+## Angular Dependency Injection: value providers
+
+```ts
+@NgModule({
+  providers: [
+    { provide: 'highlight', useValue: highlight },
+  ],
+})
+export class AppModule {}
+```
+
+```ts
+@Component({
+  selector: 'example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.scss']
+})
+export class ExampleComponent {
+  constructor(
+    @Inject('highlight') private highlight,
+  ) {}
+}
+```
