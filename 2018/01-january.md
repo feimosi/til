@@ -123,3 +123,22 @@ export class ExampleComponent {
   ) {}
 }
 ```
+
+<h1 align="center">17.01.2017</h1>
+
+## CSS: `image-set`
+
+Method of letting the browser pick the most appropriate CSS background image from a given set, primarily for high PPI screens.
+
+```css
+.foo {
+    background-image: image-set(url(img/test.png) 1x,
+                                url(img/test-2x.png) 2x,
+                                url(my-img-print.png) 600dpi);
+}
+```
+
+Polyfilling:
+https://github.com/SuperOl3g/postcss-image-set-polyfill
+
+:arrow_right: https://drafts.csswg.org/css-images-4/#image-set-notation
