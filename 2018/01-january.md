@@ -142,3 +142,33 @@ Polyfilling:
 https://github.com/SuperOl3g/postcss-image-set-polyfill
 
 :arrow_right: https://drafts.csswg.org/css-images-4/#image-set-notation
+
+<h1 align="center">19.01.2017</h1>
+
+## Git
+
+Show which specific files are ignored by `.gitignore`:
+
+```sh
+git status --ignored
+```
+
+Look for specified patterns in the tracked files in the work tree, blobs registered in the index file, or blobs in given tree objects:
+
+```sh
+git grep <keyword>
+```
+
+```sh
+# Looks for `time` in all tracked .c and .h files in the working directory
+git grep 'time' -- '*.[ch]'
+
+# Looks for a line that has `NODE` or `Unexpected` in files that have lines that match both.
+git grep --all-match -e NODE -e Unexpected
+```
+
+Set an evaporating environment variable to use `cat` as a pager:
+
+```sh
+GIT_PAGER=cat git diff
+```
