@@ -172,3 +172,85 @@ Set an evaporating environment variable to use `cat` as a pager:
 ```sh
 GIT_PAGER=cat git diff
 ```
+
+<h1 align="center">21.01.2017</h1>
+
+## JS Little-known features
+
+### Label Statements
+
+You can name `for` loops and blocks in JS and then refer to that name and use `break` or `continue`.
+
+```js
+loop:
+for (let i = 0; i < 3; i++) {
+   for (let j = 0; j < 3; j++) {
+      if (i === 1) {
+         continue loop1; // continues "loop"
+         // break loop1; // breaks out of "loop"
+      }
+   }
+}
+
+foo: {
+  console.log('one');
+  break foo;
+  console.log('this log will not be executed');
+}
+```
+
+### Comma Operator
+
+The comma operator evaluates each of its operands (from left to right) and returns the value of the last operand.
+
+```js
+function f(x) {
+  return (x += 1, x); // same as return ++x;
+}
+
+y = false, true; // expression returns true
+console.log(y); // false (left-most)
+
+z = (false, true); // expression returns true
+console.log(z); // true (right-most)
+
+const isMale = type === 'man' ? (
+    console.log('Hi Man!'),
+    true
+) : (
+    console.log('Hi Lady!'),
+    false
+);
+```
+
+### Internationalization API
+
+```js
+const date = new Date();
+
+const options = {
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric'
+};
+
+const formatter1 = new Intl.DateTimeFormat('es-es', options);
+console.log(formatter1.format(date)); // 22 de diciembre de 2017
+
+const formatter2 = new Intl.DateTimeFormat('en-us', options);
+console.log(formatter2.format(date)); // December 22, 2017
+```
+
+### Atomics
+
+Atomic operations give predictable read and write values when data is shared between the multiple threads, waiting for other operations to finish before the next one is executed. Useful for keeping data in sync between things like the main thread and another WebWorker.
+
+### `setTimeout()` Parameters
+
+```js
+setTimeout(alert, 1000, 'Hello world!');
+
+setTimeout(console.log, 1000, 'Hello World!', 'And Mars!');
+ ```
+
+:arrow_right: https://air.ghost.io/js-things-i-never-knew-existed/
