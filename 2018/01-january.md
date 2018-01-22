@@ -254,3 +254,23 @@ setTimeout(console.log, 1000, 'Hello World!', 'And Mars!');
  ```
 
 :arrow_right: https://air.ghost.io/js-things-i-never-knew-existed/
+
+<h1 align="center">22.01.2017</h1>
+
+## npm: save exact version
+
+In `.npmrc`:
+
+```sh
+save-exact = true
+```
+
+```sh
+save-prefix = ''
+```
+
+## Git: rewrite all the history leading down to the root commit
+
+```
+git rebase -i --root
+```
