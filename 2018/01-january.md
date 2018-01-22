@@ -274,3 +274,47 @@ save-prefix = ''
 ```
 git rebase -i --root
 ```
+
+## CSS Attribute Selectors
+
+### `[rel*="external"]`
+
+Attribute Contains Certain Value Somewhere
+
+```html
+<h1 rel="xxxexternalxxx">Attribute Contains</h1>
+```
+
+### `[rel^="external"]`
+
+Attribute Begins with Certain Value
+
+```html
+<h1 rel="external-link yep">Attribute Begins</h1>
+```
+
+### `[rel$="external"]`
+
+Attribute Ends with Certain Value
+
+```html
+<h1 rel="friend external">Attribute Ends</h1>
+```
+
+### `[rel~="external"]`
+
+Attribute is within Space Separated List
+
+```html
+<h1 rel="friend external sandwich">Attribute Space Separated</h1>
+```
+
+### `[rel|="friend"]`
+
+Attribute is the start of a Dash Separated List
+
+```html
+<h1 rel="friend-external-sandwich">Attribute Dash Separated</h1>
+```
+
+:arrow_right: https://css-tricks.com/attribute-selectors/
