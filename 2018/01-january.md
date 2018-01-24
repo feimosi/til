@@ -318,3 +318,17 @@ Attribute is the start of a Dash Separated List
 ```
 
 :arrow_right: https://css-tricks.com/attribute-selectors/
+
+<h1 align="center">24.01.2017</h1>
+
+## Difference between `then` and `finally` in a Promise
+
+```js
+.then(...).catch(...).then(...);
+// vs
+.then(...).catch(...).finally(...);
+```
+
+Sometimes you don't want to catch errors at the place they arise, but in the code that uses this function, so you don't catch them. Sometimes you have to clean something up whether there was an error or not. That's where you use `finally()`.
+
+Second difference: The function you pass to `catch()` could also throw, then you would have a rejected Promise and the following `then()` would not be called. `finally()` will be executed under any circumstance without changing the resolved value.
