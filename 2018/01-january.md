@@ -332,3 +332,34 @@ Attribute is the start of a Dash Separated List
 Sometimes you don't want to catch errors at the place they arise, but in the code that uses this function, so you don't catch them. Sometimes you have to clean something up whether there was an error or not. That's where you use `finally()`.
 
 Second difference: The function you pass to `catch()` could also throw, then you would have a rejected Promise and the following `then()` would not be called. `finally()` will be executed under any circumstance without changing the resolved value.
+
+<h1 align="center">26.01.2017</h1>
+
+## "Reducing" Redux code in reducers (with TypeScript)
+
+```ts
+export const handleActions = <T>(
+  actionsHandlers: { [s: string]: ((state: T, action: Action) => T) },
+  defaultState: T,
+) => (
+  state = defaultState,
+  { type, payload },
+) => {
+  const handler = actionsHandlers[type];
+  return handler ?
+    handler(state, payload) :
+    defaultState;
+};
+```
+
+```ts
+export const lessonsReducer = handleActions<LessonsState>({
+  [TYPES.FETCH_LESSON]: (state) => requestActionHandler(state),
+  [TYPES.FETCH_LESSON_FAIL]: (state, action) => errorActionHandler(state, action.payload),
+  [TYPES.FETCH_LESSON_SUCCESS]: (state, action) => ({
+    ...state,
+    lesson: action.payload.lesson,
+    isLoading: false,
+  })
+}, initialState);
+```
