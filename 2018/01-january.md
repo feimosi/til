@@ -94,7 +94,7 @@ mogrify -resize 50% *.png
 
 ## Angular: window scroll listener
 
-```ts
+```js
 @HostListener('window:resize', []) handleWindowResize() {
   // ...
 }
@@ -102,7 +102,7 @@ mogrify -resize 50% *.png
 
 ## Angular Dependency Injection: value providers
 
-```ts
+```js
 @NgModule({
   providers: [
     { provide: 'highlight', useValue: highlight },
@@ -111,7 +111,7 @@ mogrify -resize 50% *.png
 export class AppModule {}
 ```
 
-```ts
+```js
 @Component({
   selector: 'example',
   templateUrl: './example.component.html',
@@ -337,7 +337,7 @@ Second difference: The function you pass to `catch()` could also throw, then you
 
 ## "Reducing" Redux code in reducers (with TypeScript)
 
-```ts
+```js
 export const handleActions = <T>(
   actionsHandlers: { [s: string]: ((state: T, action: Action) => T) },
   defaultState: T,
@@ -352,7 +352,7 @@ export const handleActions = <T>(
 };
 ```
 
-```ts
+```js
 export const lessonsReducer = handleActions<LessonsState>({
   [TYPES.FETCH_LESSON]: (state) => requestActionHandler(state),
   [TYPES.FETCH_LESSON_FAIL]: (state, action) => errorActionHandler(state, action.payload),
@@ -363,3 +363,37 @@ export const lessonsReducer = handleActions<LessonsState>({
   })
 }, initialState);
 ```
+
+
+<h1 align="center">27.01.2017</h1>
+
+## Angular Dependency Injection: factory providers
+
+```js
+export const IS_PLATFORM_BROWSER = new InjectionToken<() => boolean>('isPlatformBrowser');
+
+@NgModule({
+  providers: [
+    {
+      provide: IS_PLATFORM_BROWSER,
+      useFactory: (platformId) => () => isPlatformBrowser(platformId),
+      deps: [PLATFORM_ID],
+    },
+  ],
+})
+export class AppModule {}
+```
+
+```js
+@Component({
+  selector: 'example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.scss']
+})
+export class ExampleComponent {
+  constructor(
+    @Inject(IS_PLATFORM_BROWSER) private isPlatformBrowser,
+  ) {}
+}
+```
+
