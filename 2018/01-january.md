@@ -397,3 +397,37 @@ export class ExampleComponent {
 }
 ```
 
+<h1 align="center">28.01.2017</h1>
+
+## ES2018: RegExp Unicode property escapes
+
+The proposal lets you additionally match characters by mentioning their Unicode character properties inside the curly braces of \p{}. In the Unicode standard, each character has properties – metadata describing it.
+
+```js
+/^\p{White_Space}+$/u.test('\t \n\r')
+// true
+
+/^\p{Script=Greek}+$/u.test('μετά')
+// true
+
+/^\p{Script=Latin}+$/u.test('mañana')
+// true
+```
+
+:arrow_right: http://2ality.com/2017/07/regexp-unicode-property-escapes.html
+
+## `@@unscopable` symbol
+
+Contains property names that were not included in the ECMAScript standard prior to the ES2015 version. These properties are excluded from with statement bindings.
+
+```js
+var keys = [];
+
+with (Array.prototype) {
+  keys.push('something');
+}
+```
+
+This prevents that the `Array.prototype.keys()` method is being scoped into the `with` statement.
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@unscopables
