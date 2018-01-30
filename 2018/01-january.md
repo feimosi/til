@@ -431,3 +431,35 @@ with (Array.prototype) {
 This prevents that the `Array.prototype.keys()` method is being scoped into the `with` statement.
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@unscopables
+
+<h1 align="center">30.01.2017</h1>
+
+## Angular: `<ng-container>`
+
+`<ng-container>` is a grouping element that doesn't interfere with styles or layout because Angular doesn't put it in the DOM.
+
+Conditionally exclude a select `<option>`:
+
+```html
+<select [(ngModel)]="hero">
+  <ng-container *ngFor="let h of heroes">
+    <ng-container *ngIf="showSad || h.emotion !== 'sad'">
+      <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
+    </ng-container>
+  </ng-container>
+</select>
+```
+
+## Angular: `:host-context`
+
+The `:host-context()` selector looks for a CSS class in any ancestor of the component host element, up to the document root.
+
+```html
+<body class="theme-dark">
+```
+
+```css
+:host-context(.theme-dark) .content {
+  background-color: #eee;
+}
+```
