@@ -463,3 +463,30 @@ The `:host-context()` selector looks for a CSS class in any ancestor of the comp
   background-color: #eee;
 }
 ```
+
+<h1 align="center">31.01.2017</h1>
+
+## Deep-copying in JavaScript
+
+If you don’t expect cyclic objects and don’t need to preserve built-in types, you get the fastest clone across all browsers by using `JSON.parse`.
+
+```js
+const obj = /* ... */;
+const copy = JSON.parse(JSON.stringify(obj));
+```
+If you want a proper structured clone, MessageChannel is your only reliable cross-browser choic
+
+```js
+function structuralClone(obj) {
+  return new Promise(resolve => {
+    const { port1, port2 } = new MessageChannel();
+    port2.onmessage = ev => resolve(ev.data);
+    port1.postMessage(obj);
+  });
+}
+
+const obj = /* ... */;
+const clone = await structuralClone(obj);
+```
+
+:arrow_right: https://dassur.ma/things/deep-copy/?utm_source=ESnextNews.com&utm_medium=Weekly+Newsletter&utm_campaign=2018-01-30
