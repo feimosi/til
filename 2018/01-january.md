@@ -1,4 +1,4 @@
-<h1 align="center">04.01.2017</h1>
+<h1 align="center">04.01.2018</h1>
 
 ## CSS - skip-ink underlines
 
@@ -53,7 +53,7 @@ const { day, month, year } = patter.exec("30.04.2017").groups;
 
 :arrow_right: https://dev.to/kayis/javascripts-regular-expressions-get-more-power-4m4j
 
-<h1 align="center">14.01.2017</h1>
+<h1 align="center">14.01.2018</h1>
 
 ## MouseEvent's coordinates
 
@@ -74,7 +74,7 @@ const eventTop = event.clientY - top;
 const eventLeft = event.clientX - left;
 ```
 
-<h1 align="center">15.01.2017</h1>
+<h1 align="center">15.01.2018</h1>
 
 ## Resize images
 
@@ -90,7 +90,7 @@ The `mogrify` command is in many ways like `convert` except it is designed to mo
 mogrify -resize 50% *.png
 ```
 
-<h1 align="center">16.01.2017</h1>
+<h1 align="center">16.01.2018</h1>
 
 ## Angular: window scroll listener
 
@@ -124,7 +124,7 @@ export class ExampleComponent {
 }
 ```
 
-<h1 align="center">17.01.2017</h1>
+<h1 align="center">17.01.2018</h1>
 
 ## CSS: `image-set`
 
@@ -143,7 +143,7 @@ https://github.com/SuperOl3g/postcss-image-set-polyfill
 
 :arrow_right: https://drafts.csswg.org/css-images-4/#image-set-notation
 
-<h1 align="center">19.01.2017</h1>
+<h1 align="center">19.01.2018</h1>
 
 ## Git
 
@@ -173,7 +173,7 @@ Set an evaporating environment variable to use `cat` as a pager:
 GIT_PAGER=cat git diff
 ```
 
-<h1 align="center">21.01.2017</h1>
+<h1 align="center">21.01.2018</h1>
 
 ## JS Little-known features
 
@@ -255,7 +255,7 @@ setTimeout(console.log, 1000, 'Hello World!', 'And Mars!');
 
 :arrow_right: https://air.ghost.io/js-things-i-never-knew-existed/
 
-<h1 align="center">22.01.2017</h1>
+<h1 align="center">22.01.2018</h1>
 
 ## npm: save exact version
 
@@ -319,7 +319,7 @@ Attribute is the start of a Dash Separated List
 
 :arrow_right: https://css-tricks.com/attribute-selectors/
 
-<h1 align="center">24.01.2017</h1>
+<h1 align="center">24.01.2018</h1>
 
 ## Difference between `then` and `finally` in a Promise
 
@@ -333,7 +333,7 @@ Sometimes you don't want to catch errors at the place they arise, but in the cod
 
 Second difference: The function you pass to `catch()` could also throw, then you would have a rejected Promise and the following `then()` would not be called. `finally()` will be executed under any circumstance without changing the resolved value.
 
-<h1 align="center">26.01.2017</h1>
+<h1 align="center">26.01.2018</h1>
 
 ## "Reducing" Redux code in reducers (with TypeScript)
 
@@ -365,7 +365,7 @@ export const lessonsReducer = handleActions<LessonsState>({
 ```
 
 
-<h1 align="center">27.01.2017</h1>
+<h1 align="center">27.01.2018</h1>
 
 ## Angular Dependency Injection: factory providers
 
@@ -397,7 +397,7 @@ export class ExampleComponent {
 }
 ```
 
-<h1 align="center">28.01.2017</h1>
+<h1 align="center">28.01.2018</h1>
 
 ## ES2018: RegExp Unicode property escapes
 
@@ -432,7 +432,7 @@ This prevents that the `Array.prototype.keys()` method is being scoped into the 
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@unscopables
 
-<h1 align="center">30.01.2017</h1>
+<h1 align="center">30.01.2018</h1>
 
 ## Angular: `<ng-container>`
 
@@ -464,7 +464,7 @@ The `:host-context()` selector looks for a CSS class in any ancestor of the comp
 }
 ```
 
-<h1 align="center">31.01.2017</h1>
+<h1 align="center">31.01.2018</h1>
 
 ## Deep-copying in JavaScript
 
