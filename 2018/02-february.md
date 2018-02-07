@@ -70,3 +70,21 @@ function handleFiles(e) {
 `window.URL.createObjectURL(img.file)` could be used in this case as well.
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
+
+<h1 align="center">07.02.2018</h1>
+
+## JavaScript Barrel
+
+A barrel is a way to rollup exports from several modules into a single convenient module. The barrel itself is a module file that re-exports selected exports of other modules.
+
+```js
+// foo/a.ts
+export function a() {}
+
+// foo/b.ts
+export function b() {}
+
+// foo/index.ts
+export {a} from './a';
+export {b} from './b';
+```
