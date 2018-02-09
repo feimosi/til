@@ -88,3 +88,17 @@ export function b() {}
 export {a} from './a';
 export {b} from './b';
 ```
+
+<h1 align="center">09.02.2018</h1>
+
+## Use multiple SSH private keys
+
+```sh
+$ cat ~/.ssh/config
+Host github
+    HostName github.com
+    IdentityFile ~/.ssh/id_rsa
+Host bitbucket.org
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/id_rsa_bitbucket
+```
