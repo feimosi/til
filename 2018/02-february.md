@@ -102,3 +102,7 @@ Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/id_rsa_bitbucket
 ```
+
+### CSS `font-variant: small-caps`
+
+Enables display of small capitals. Small-caps glyphs typically use the form of uppercase letters but are reduced to the size of lowercase letters.
