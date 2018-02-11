@@ -101,6 +101,9 @@ Host github
 Host bitbucket.org
     HostName bitbucket.org
     IdentityFile ~/.ssh/id_rsa_bitbucket
+Host bitbucket.org-other
+    HostName bitbucket.org
+    IdentityFile ~/.ssh/id_rsa_other
 ```
 
 ### CSS `font-variant: small-caps`
