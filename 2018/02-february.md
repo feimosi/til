@@ -109,3 +109,13 @@ Host bitbucket.org-other
 ### CSS `font-variant: small-caps`
 
 Enables display of small capitals. Small-caps glyphs typically use the form of uppercase letters but are reduced to the size of lowercase letters.
+
+<h1 align="center">09.02.2018</h1>
+
+## Node.js: Encode / decode base64
+
+```js
+Buffer.from("Hello World").toString('base64'));
+
+Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii');
+```
