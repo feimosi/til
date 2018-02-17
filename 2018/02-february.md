@@ -119,3 +119,55 @@ Buffer.from("Hello World").toString('base64'));
 
 Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii');
 ```
+
+<h1 align="center">17.02.2018</h1>
+
+## React 17: `getDerivedStateFromProps` instead of `componentWillReceiveProps`
+
+```jsx
+componentWillReceiveProps(newProps) {
+  if (this.props.userID !== newProps.userID) {
+    this.setState({ profileOrError: undefined })
+    fetchUserProfile(newProps.userID)
+      .catch(error => error)
+      .then(profileOrError => this.setState({ profileOrError }))
+  }
+}
+```
+
+:arrow_down:
+
+```jsx
+class ExampleComponent extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // Store prevUserId in state so we can compare when props change.
+    // Clear out any previously-loaded user data (so we don't render stale stuff).
+    if (nextProps.userId !== prevState.prevUserId) {
+      return {
+        prevUserId: nextProps.userId,
+        profileOrError: null,
+      };
+    }
+
+    // No state update necessary
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.profileOrError === null) {
+      // At this point, we're in the "commit" phase, so it's safe to load the new data.
+      this._loadUserData();
+    }
+  }
+
+  render() {
+    if (this.state.profileOrError === null) {
+      // Render loading UI
+    } else {
+      // Render user data
+    }
+  }
+}
+```
+
+:arrow_right: https://github.com/reactjs/rfcs/issues/26#issuecomment-365744134
