@@ -171,3 +171,12 @@ class ExampleComponent extends React.Component {
 ```
 
 :arrow_right: https://github.com/reactjs/rfcs/issues/26#issuecomment-365744134
+
+<h1 align="center">22.02.2018</h1>
+
+## `string.replace` - specifying a function as a parameter
+
+```js
+'the quick brown fox jumps over the lazy dog'.replace(/\b\w\B/g, w => w.toUpperCase())
+// => "The Quick Brown Fox Jumps Over The Lazy Dog"
+```
