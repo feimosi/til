@@ -180,3 +180,34 @@ class ExampleComponent extends React.Component {
 'the quick brown fox jumps over the lazy dog'.replace(/\b\w\B/g, w => w.toUpperCase())
 // => "The Quick Brown Fox Jumps Over The Lazy Dog"
 ```
+
+<h1 align="center">24.02.2018</h1>
+
+## `append()` vs `appendChild()`
+
+- ParentNode.append() allows you to also append DOMString object, whereas Node.appendChild() only accepts Node objects.
+- ParentNode.append() has no return value, whereas Node.appendChild() returns the appended Node object.
+- ParentNode.append() can append several nodes and strings, whereas Node.appendChild() can only append one node.
+
+## `KeyboardEvent.getModifierState()`
+
+Returns the current state of the specified modifier key: true if the modifier is active (that is the modifier key is pressed or locked), otherwise, false.
+
+```js
+if (event.getModifierState("Fn") ||
+    event.getModifierState("OS")) {
+  /* ... */
+}
+
+if (event.getModifierState("Control") ||
+    event.getModifierState("Alt")) {
+  /* ... */
+}
+```
+
+## `encodeURI` vs `encodeURIComponent`
+
+- encodeURI is intended for use on the full URI.
+- encodeURIComponent is intended to be used on .. well .. URI components that is any part that lies between separators (; / ? : @ & = + $ , #).
+
+So, in encodeURIComponent these separators are encoded also because they are regarded as text and not special characters.
