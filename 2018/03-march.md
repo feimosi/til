@@ -58,3 +58,17 @@ svgElement.addEventListener("mouseout", () => {
 ```
 
 :arrow_right: https://mailchi.mp/f423b0d7cc95/js-tips-combine-validators-1287685
+
+<h1 align="center">14.03.2018</h1>
+
+## Vim: Delete everything above a certain line
+
+```
+dgg
+```
+
+`d` is the deletion command, and `gg` is a movement command that says go to the top of the file,
+
+`kdgg` delete all lines above the current one (`k` is moving the cursor up a line).
+
+`dG` will delete all lines at or below the current one
