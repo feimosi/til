@@ -72,3 +72,11 @@ dgg
 `kdgg` delete all lines above the current one (`k` is moving the cursor up a line).
 
 `dG` will delete all lines at or below the current one
+
+<h1 align="center">18.03.2018</h1>
+
+## The stacking context (z-index)
+
+![](https://developer.mozilla.org/@api/deki/files/913/=Understanding_zindex_04.png)
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
