@@ -80,3 +80,27 @@ dgg
 ![](https://developer.mozilla.org/@api/deki/files/913/=Understanding_zindex_04.png)
 
 :arrow_right: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+
+
+<h1 align="center">22.03.2018</h1>
+
+## Git: double-dot ".." and triple-dot "..." difference
+
+### Diff
+
+![](https://i.stack.imgur.com/a8HHAm.png)
+![](https://i.stack.imgur.com/6K2Rlm.png)
+
+### Log
+
+![](https://image.slidesharecdn.com/gitshakespearemergingrebasing-150902074501-lva1-app6891/95/grokking-git-with-shakespeare-14-638.jpg)
+
+## Log commits with changed files
+```git
+git log --name-only
+```
+```git
+git log --numstat
+```
+
+:arrow_right: https://stackoverflow.com/a/24186641/7350152
