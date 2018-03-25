@@ -104,3 +104,81 @@ git log --numstat
 ```
 
 :arrow_right: https://stackoverflow.com/a/24186641/7350152
+
+<h1 align="center">25.03.2018</h1>
+
+## ES2018: Async interators
+
+```js
+async function asyncSum(a){
+  let sum = 0;
+  for await (const x of a) {
+    sum += x;
+  }
+  return sum;
+}
+```
+
+```js
+interface AsyncIterable {
+  [Symbol.asyncIterator](): AsyncIterator;
+}
+
+interface AsyncIterator {
+  next(): Promise<IterResultObject>;
+}
+
+interface IterResultObject {
+  value : any;
+  done : boolean;
+}
+```
+
+All iterables are implicitly async-iterable via so-called Async-from-Sync Iterator Objects™.
+
+```js
+asyncSum([1, 2, 3]).then(console.log);
+// → 6
+```
+
+Node streams are async-iterable starting with Node 10 (WARNING: the feature is considered experimental!).
+
+```js
+const fs = require('fs');
+(async () =>{
+  const readStream = fs.createReadStream('file');
+  for await (const chunk of readStream) {
+    console.log(chunk);
+  }
+})();
+```
+
+## ES2018: Regex Lookahead / Lookbehind
+
+```js
+// Positive lookahead:
+const pattern =/\d+(?= dollars)/u;
+const result = pattern.exec('42 dollars');
+// → result[0] === '42'
+```
+
+```js
+// Negative lookahead:
+const pattern =/\d+(?! dollars)/u;
+const result = pattern.exec('42 pesos');
+// → result[0] === '42
+```
+
+```js
+// Positive lookbehind:
+const pattern =/(?<=\$)\d+/u;
+'Price: $42'.replace(pattern,'9001');
+// → 'Price: $9001'
+```
+
+```js
+// Negative lookbehind:
+const pattern =/(?<!\$\d*)\d+/gu;
+'My 17 children have $42 and €3 each.'.replace(pattern,'9001');
+// → 'My 9001 children have $42 and €9001 each.'
+```
