@@ -182,3 +182,119 @@ const pattern =/(?<!\$\d*)\d+/gu;
 'My 17 children have $42 and €3 each.'.replace(pattern,'9001');
 // → 'My 9001 children have $42 and €9001 each.'
 ```
+
+<h1 align="center">30.03.2018</h1>
+
+## New in React 16.3
+
+### `createContext` API
+
+```jsx
+import React from "react";
+import { render } from "react-dom";
+
+const MyContext = React.createContext("Hello");
+
+const MyProvider = ({children}) =>
+  <MyContext.Provider value="world">
+    {children}
+  </MyContext.Provider>;
+
+const App = () => (
+  <MyProvider>
+    <MyContext.Consumer>
+      {value => <h1>Hello, {value}!</h1>}
+    </MyContext.Consumer>
+  </MyProvider>
+);
+
+render(
+  <App />,
+  document.getElementById("⚛️")
+);
+```
+
+*Use cases*
+- Reduce Prop Drilling
+- Theming
+- Localization
+- Data Flow (Unstated)
+
+### `createRef` API
+
+```jsx
+class Hello extends React.Component {
+  myRef = React.createRef();
+  render() {
+    return <section>
+      <input type="text" ref={this.myRef} />
+    </section>;
+  }
+  componentDidMount() {
+    this.myRef.current.focus();
+  }
+}
+```
+
+### `forwardRef` API
+
+```jsx
+const MyInput = React.forwardRef((props, ref) => (
+  <div className="MyInput">
+    <input type="text" ref={ref} {...props} />
+  </div>
+));
+
+class Hello extends React.Component {
+  myRef = React.createRef();
+  render() {
+    return <section>
+        <MyInput ref={this.myRef} />
+    </section>;
+  }
+  componentDidMount() {
+    this.myRef.current.focus();
+  }
+}
+```
+
+### Deprecations
+
+The following methods will soon be deprecated and prepended with UNSAFE_
+
+- componentWillMount
+- componentWillUpdate
+- componentWillReceiveProps
+
+### `getDerivedStateFromProps`
+
+```jsx
+class MyClass extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value !== prevState.value) {
+      return({value: nextProps.value});
+    }
+  }
+}
+```
+
+### `getSnapshotBeforeUpdate`
+
+```jsx
+class MyClass extends Component {
+  listRef = React.createRef();
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return prevProps.list.length < this.props.list.length ?
+      this.listRef.scrollHeight : null;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot !== null) {
+      const listRef = this.listRef;
+      listRef.scrollTop += listRef.scrollHeight - snapshot;
+    }
+  }
+  render() { return <div ref={this.listRef}>{ /*...*/ }</div>; }
+}
+```
+
+:arrow_right: http://elijahmanor.com/talks/react-16-3/
