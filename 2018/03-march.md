@@ -298,3 +298,37 @@ class MyClass extends Component {
 ```
 
 :arrow_right: http://elijahmanor.com/talks/react-16-3/
+
+## `srcset` and `sizes`
+
+`srcset` attribute offers a place to list potential source files (paired with their pixel dimensions) for an image, and the `sizes` attribute gives the browser the rough idea of the dimensions at which the image will be displayed in the page layout.
+
+```html
+<img src="imgs/bike.jpg"
+     srcset="imgs/bike.jpg 480w, imgs/bike-1200.jpg 1200w, imgs/bike-2000.jpg 2000w" 
+     sizes="100vw" 
+     alt="A red bicycle">
+```
+
+Browser will continuously evaluate an image's source selection throughout the browsing session (e.g. the user resizes their browser). Also, it will re-evaluate whenever the `sizes` attribute's value changes, which means we can use JavaScript to do that in real time if the user interface calls for it.
+
+:arrow_right: https://www.filamentgroup.com/lab/sizes-swap/
+
+## `MutationObserver`
+
+MutationObserver provides developers with a way to react to changes in a DOM.
+
+```js
+const element = document.querySelector("#element");
+
+new MutationObserver(() => {
+  console.log("Element changed");
+}).observe(element, {
+  childList: true,
+  attributes: true,
+  subtree: true,
+  characterData: true
+});
+```
+
+:arrow_right: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
