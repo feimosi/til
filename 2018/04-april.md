@@ -31,3 +31,37 @@ _.keyBy(array, function(o) {
 }
 */
 ```
+
+<h1 align="center">08.04.2018</h1>
+
+## React 16 SSR
+
+### `renderToString(element)`
+
+Render a React element to its initial HTML. React will return an HTML string. 
+
+### `renderToStaticMarkup(element)`
+
+Similar to `renderToString`, except this doesn’t create extra DOM attributes that React uses internally. This is useful if you want to use React as a simple static page generator, as stripping away the extra attributes can save some bytes.
+
+### `renderToNodeStream(element)`
+
+Render a React element to its initial HTML. Returns a Readable stream that outputs an HTML string. The HTML output by this stream is exactly equal to what `renderToString` would return.
+
+### `renderToStaticNodeStream(element)`
+
+Similar to `renderToNodeStream`, except this doesn’t create extra DOM attributes that React uses internally. This is useful if you want to use React as a simple static page generator.
+
+### `hydrate(element, container[, callback])`
+
+Same as render(), but is used to hydrate a container whose HTML contents were rendered by ReactDOMServer. React will attempt to attach event listeners to the existing markup.
+
+### React Component Caching
+
+React Component Caching is a component-level caching library for faster server-side rendering with React 16.
+
+- Use any of React's four server-side rendering methods. Rendering is asynchronous.
+- Cache components using a simple or template strategy.
+-Choose from three cache implementations (LRU, Redis, or Memcached).
+
+:arrow_right: https://github.com/rookLab/react-component-caching
