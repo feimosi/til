@@ -91,3 +91,15 @@ autocompleteInput.addEventListener('keyup', () => {
     });
 });
 ```
+
+## CSS Typed Object Model
+
+CSS now has a proper object-based API for working with values in JavaScript (Chrome 66+).
+
+```js
+el.attributeStyleMap.set('padding', CSS.px(42));
+const padding = el.attributeStyleMap.get('padding');
+console.log(padding.value, padding.unit); // 42, 'px'
+```
+
+:arrow_right: https://developers.google.com/web/updates/2018/03/cssom
