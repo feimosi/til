@@ -65,3 +65,29 @@ React Component Caching is a component-level caching library for faster server-s
 -Choose from three cache implementations (LRU, Redis, or Memcached).
 
 :arrow_right: https://github.com/rookLab/react-component-caching
+
+## Abortable Fetch
+
+Abortable fetch relies on a browser specification for AbortController. The controller has a property called signal which we can pass to our fetch as an option (also named signal), and then use this at our later convenience to cancel the request with the controllers abort method.
+
+```js
+let controller;
+let signal;
+
+autocompleteInput.addEventListener('keyup', () => {
+    if (controller !== undefined) {
+        // Cancel the previous request
+        controller.abort();
+    }
+
+    if ("AbortController" in window) {
+        controller = new AbortController;
+        signal = controller.signal;
+    }
+
+    fetch(url, { signal })
+        .then((response) => {})
+        .catch((error) => {})
+    });
+});
+```
