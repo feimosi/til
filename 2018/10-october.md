@@ -9,3 +9,11 @@ type Stringify<T> = {
     [K in keyof T]: string
 };
 ```
+
+## Enable diffing of untracked files
+
+```git
+git add -N
+# or
+git add --intent-to-add
+```
