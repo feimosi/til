@@ -58,3 +58,35 @@ You can also use a url of a semi-transparent image to define a shape, and the te
 ```
 
 :arrow_right: https://tympanus.net/codrops/2018/11/29/an-introduction-to-css-shapes/
+
+# `forEach` with `async/await`
+
+The following does not wait for completion:
+
+```js
+arr.forEach(async (i) => {
+  await wait(i);
+  console.log(i);
+})
+```
+
+This does:
+
+```js
+await Promise.all(arr.map(async (i) => {
+  await wait(i);
+  console.log(i);
+}))
+```
+
+Keeping sequential execution:
+
+```js
+await arr.reduce(async (prev, i) => {
+  await prev;
+  await wait(i);
+  console.log(i);
+}, Promise.resolve());
+```
+
+:arrow_right: https://mailchi.mp/c1914d867390/js-tips-combine-validators-1447373
