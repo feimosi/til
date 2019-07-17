@@ -36,3 +36,13 @@ type A = Writable<{
 ```
 
 https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/
+
+# TypeScript `const` assertions
+
+When we construct new literal expressions with const assertions, we can signal to the language that
+
+- no literal types in that expression should be widened (e.g. no going from "hello" to string)
+- object literals get readonly properties
+- array literals become readonly tuples
+
+https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/
