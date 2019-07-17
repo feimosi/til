@@ -20,3 +20,19 @@ email: string;
 ```
 
 https://github.com/typeorm/typeorm/issues/4007
+
+# TypeScript utility type that strips away readonly
+
+```ts
+type Writable<T> = {
+    -readonly [K in keyof T]: T[K]
+}
+
+// { a: string, b: number }
+type A = Writable<{
+    readonly a: string;
+    readonly b: number
+}>;
+```
+
+https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/
