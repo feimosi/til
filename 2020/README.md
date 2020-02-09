@@ -48,3 +48,15 @@ const collator = new Intl.Collator(undefined, { numeric: true });
 
 ["item11", "item10", "item9"].sort(collator.compare) // ["item9","item10","item11"]
 ```
+
+# Bind custom function arguments
+
+If you want the second etc. argument to be bound, native `bind` provides little help.
+
+However Lodash provides a `bind` function. Its signature is similar to the native `bind`, but it's more generic, as it supports `_.bind.placeholder` to skip parameters. Using this placeholder, any of the parameters can be partially applied.
+
+```js
+const powerOf2 = _.bind(Math.pow, undefined, _.bind.placeholder, 2);
+
+console.log(powerOf2(3)); // 3^2 = 9
+```
