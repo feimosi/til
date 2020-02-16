@@ -60,3 +60,55 @@ const powerOf2 = _.bind(Math.pow, undefined, _.bind.placeholder, 2);
 
 console.log(powerOf2(3)); // 3^2 = 9
 ```
+
+# TypeScript: Type predicates
+
+Type predicates in TypeScript help you narrowing down your types based on conditionals. They’re similar to type guards, but work on functions. They way the work is, if a function returns true, change the type of the paramter to something more useful.
+
+```ts
+function isString(s): s is string {
+  return typeof s === 'string';
+}
+
+function toUpperCase(x: unknown) {
+  if(isString(x)) {
+    x.toUpperCase(); // ✅ all good, x is string
+  }
+}
+```
+
+```ts
+type Dice = 1 | 2 | 3 | 4 | 5 | 6;
+
+function pipsAreValid(pips: number): pips is Dice {
+  return pips === 1 || pips === 2 || pips === 3 ||
+    pips === 4 || pips === 5 || pips === 6;
+}
+
+function evalThrow(count: number) {
+  if (pipsAreValid(count)) {
+    // count is now of type Dice 😎
+    // ...
+  }
+}
+```
+
+:arrow_right: https://fettblog.eu/typescript-type-predicates/
+
+# TypeScript: Assertion signatures
+
+```ts
+function addCache<T extends {}>(
+  service: T,
+): asserts service is T & { cache: Cache } {
+  Object.defineProperty(service, 'cache', new Cache());
+}
+
+const someService = {};
+
+addCache(someService);
+
+someService.cache instanceof Cache; // => true
+```
+
+:arrow_right: https://fettblog.eu/typescript-assertion-signatures/
