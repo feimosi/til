@@ -112,3 +112,37 @@ someService.cache instanceof Cache; // => true
 ```
 
 :arrow_right: https://fettblog.eu/typescript-assertion-signatures/
+
+# TypeScript: Exhaustiveness checking
+
+We would like the compiler to tell us when we don’t cover all variants of the discriminated union. For example, if we add Triangle to Shape:
+
+```ts
+type Shape = Square | Rectangle | Circle | Triangle;
+
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+    }
+    // should error here - we didn't handle case "triangle"
+}
+```
+
+Use the `never` type that the compiler uses to check for exhaustiveness
+
+```ts
+function area(s: Shape) {
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.height * s.width;
+        default: return assertNever(s); // error here if there are missing cases
+    }
+}
+
+function assertNever(x: never): never {
+    throw new Error("Unexpected object: " + x);
+}
+```
+
+:arrow_right: https://www.typescriptlang.org/docs/handbook/advanced-types.html#exhaustiveness-checking
