@@ -146,3 +146,21 @@ function assertNever(x: never): never {
 ```
 
 :arrow_right: https://www.typescriptlang.org/docs/handbook/advanced-types.html#exhaustiveness-checking
+
+# Get an event's coordinates relative to an element
+
+The MouseEvent object has several properties that indicate the position where the event happened:
+
+- `offsetX/Y` have the coordinates relative to the target element
+- `pageX/Y` are to the document
+- `screenX/Y` are to the screen
+- `clientX/Y` (aka. x/y) are to the viewport
+
+To get the coordinates relative to another element, the simplest solution is to use `.getBoundingClientRect()` which uses viewport coordinates, the same as `clientX/Y`.
+
+```js
+const { top, left } = element.getBoundingClientRect();
+
+const eventTop = event.clientY - top;
+const eventLeft = event.clientX - left;
+```
