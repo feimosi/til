@@ -164,3 +164,29 @@ const { top, left } = element.getBoundingClientRect();
 const eventTop = event.clientY - top;
 const eventLeft = event.clientX - left;
 ```
+
+# React hook to persist state in localStorage
+
+```js
+function useStickyState(defaultValue, key) {
+  const [value, setValue] = React.useState(() => {
+    const stickyValue = window.localStorage.getItem(key);
+    return stickyValue !== null
+      ? JSON.parse(stickyValue)
+      : defaultValue;
+  });
+  React.useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
+}
+
+...
+
+const CalendarView = () => {
+  const [mode, setMode] = useStickyState('day', 'calendar-view');
+  // ...
+}
+```
+
+:arrow_right: https://joshwcomeau.com/react/persisting-react-state-in-localstorage/
