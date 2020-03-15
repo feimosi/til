@@ -224,3 +224,35 @@ One million records are inserted in the following example:
 ```sql
 INSERT INTO demotable SELECT random() * 1000,  generate_series(1, 1000000);
 ```
+
+# `Promise.allSettled`
+
+`Promise.allSettled` gives you a signal when all the input promises are settled, which means they’re either fulfilled or rejected. This is useful in cases where you don’t care about the state of the promise, you just want to know when the work is done, regardless of whether it was successful.
+
+```js
+const promises = [
+  fetch('/api-call-1'),
+  fetch('/api-call-2'),
+  fetch('/api-call-3'),
+];
+// Imagine some of these requests fail, and some succeed.
+
+await Promise.allSettled(promises);
+// All API calls have finished (either failed or succeeded).
+removeLoadingIndicator();
+```
+
+# `String.matchAll`
+
+A common use case of global (g) or sticky (y) regular expressions is applying it to a string and iterating through all of the matches. The new `String.matchAll` API makes this easier than ever before, especially for regular expressions with capture groups:
+
+```js
+const string = 'Favorite GitHub repos: tc39/ecma262 v8/v8.dev';
+const regex = /\b(?<owner>[a-z0-9]+)\/(?<repo>[a-z0-9\.]+)\b/g;
+
+for (const match of string.matchAll(regex)) {
+  console.log(`${match[0]} at ${match.index} with '${match.input}'`);
+  console.log(`→ owner: ${match.groups.owner}`);
+  console.log(`→ repo: ${match.groups.repo}`);
+}
+```
