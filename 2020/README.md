@@ -216,3 +216,11 @@ useEffect(() => {
 ```
 
 :arrow_right: https://reacttraining.com/blog/useEffect-is-not-the-new-componentDidMount
+
+# PostgreSQL: Populate table with large dataset
+
+One million records are inserted in the following example:
+
+```sql
+INSERT INTO demotable SELECT random() * 1000,  generate_series(1, 1000000);
+```
