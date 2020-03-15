@@ -190,3 +190,29 @@ const CalendarView = () => {
 ```
 
 :arrow_right: https://joshwcomeau.com/react/persisting-react-state-in-localstorage/
+
+# `componentDidMount` vs `useEffect` 
+
+`componentDidMount` and `useEffect` run after the mount. However `useEffect` runs after the paint has been committed to the screen as opposed to before. This means you would get a flicker if you needed to read from the DOM, then synchronously set state to make new UI.
+
+`useLayoutEffect` was designed to have the same timing as `componentDidMount`. So `useLayoutEffect(fn, [])` is a much closer match to `componentDidMount()` than `useEffect(fn, [])` -- at least from a timing standpoint.
+
+## `useEffect` cleanup
+
+Don't forget to do a cleanup function - this will prevent the bug of setting state on an unmounted component and setting stale state when the uid changes:
+
+```js
+useEffect(() => {
+  let isCurrent = true
+  getUser(uid).then(user => {
+    if (isCurrent) {
+      setUser(user)
+    }
+  })
+  return () => {
+    isCurrent = false
+  }
+}, [uid])
+```
+
+:arrow_right: https://reacttraining.com/blog/useEffect-is-not-the-new-componentDidMount
