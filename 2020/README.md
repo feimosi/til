@@ -256,3 +256,42 @@ for (const match of string.matchAll(regex)) {
   console.log(`→ repo: ${match.groups.repo}`);
 }
 ```
+
+# TypeScript: Discriminated Unions
+
+TypeScript is structurally typed, it only cares about the properties that objects contain (not how they were constructed).
+
+There are 2 requirements for discriminated unions:
+
+- Types that have a common, singleton type property — the discriminant.
+- A type alias that takes the union of those types — the union.
+
+```ts
+interface Dog {
+    kind: "dog"
+    bark: string
+}
+
+interface Cat {
+    kind: "cat"
+    meow: string
+}
+
+type Animal = Cat | Dog
+```
+
+Now given an `Animal`, we can use the `kind` property to distinguish which one we have. For example
+
+```ts
+function animalNoise(animal: Animal): string {
+    // TypeScript won't allow us to access bark or meow because this animal might not have them
+
+    if (animal.kind == "dog") {
+        // Now TypeScript knows the animal is a Dog, so we can safely access bark
+        return animal.bark
+    } else {
+        // Here the compiler has determined the animal must be a Cat
+        return animal.meow
+    }
+}
+```
