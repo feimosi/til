@@ -295,3 +295,15 @@ function animalNoise(animal: Animal): string {
     }
 }
 ```
+
+# TypeScript: `Parameters<T>`
+
+A base TypeScript utility type that returns a tuple of the parameter types for given function.
+
+```ts
+function foo(a: string, b: number): void {} // (a: string, b: number): void
+
+Parameters<typeof foo> // [string, number]
+
+function bar(a: Parameters<typeof foo>[0]) {} // (a: string): void
+```
