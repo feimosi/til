@@ -307,3 +307,15 @@ Parameters<typeof foo> // [string, number]
 
 function bar(a: Parameters<typeof foo>[0]) {} // (a: string): void
 ```
+
+# Meta Refresh
+
+Redirects to the provided URL in 5 seconds. Set to 0 for an immediate redirect
+
+```html
+<meta http-equiv="refresh" content="5">
+```
+
+# Git: `push --force-with-lease`
+
+`--force-with-lease` is a safer option that will not overwrite any work on the remote branch if more commits were added to the remote branch. It ensures you do not overwrite someone elses work by force pushing.
