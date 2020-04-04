@@ -336,3 +336,35 @@ const foo: Foo = {
 type Foo = { foo: string }
 type Foo = { bar: string } // Error
 ```
+
+# TypeScript: Index signature
+
+Interfaces need an explicit index signature while types have an implicit one.
+
+```ts
+interface MyStyles {
+  container: string;
+  wrapper: string;
+  footer: string;
+}
+
+declare const myStyles: MyStyles;
+declare function inject(styles: Record<string, string>): void;
+
+inject(myStyles); // Error: "Index signature is missing in type 'MyStyles'.
+```
+
+```ts
+interface MyStyles {
+  container: string;
+  wrapper: string;
+  footer: string;
+  [index: string]: string;
+}
+
+type MyStyles = {
+  container: string;
+  wrapper: string;
+  footer: string;
+}
+```
