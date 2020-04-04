@@ -319,3 +319,20 @@ Redirects to the provided URL in 5 seconds. Set to 0 for an immediate redirect
 # Git: `push --force-with-lease`
 
 `--force-with-lease` is a safer option that will not overwrite any work on the remote branch if more commits were added to the remote branch. It ensures you do not overwrite someone elses work by force pushing.
+
+# TypeScript: Declaration merging, module augmentation
+
+```ts
+interface Foo { foo: string }
+interface Foo { bar: string }
+
+// Interfaces merge
+const foo: Foo = { 
+  foo: 'hello',
+  bar: ‘world’,
+}
+
+// Types aliases don’t.  Error: “Duplicate identifier 'Foo'.”
+type Foo = { foo: string }
+type Foo = { bar: string } // Error
+```
