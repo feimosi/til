@@ -320,7 +320,9 @@ Redirects to the provided URL in 5 seconds. Set to 0 for an immediate redirect
 
 `--force-with-lease` is a safer option that will not overwrite any work on the remote branch if more commits were added to the remote branch. It ensures you do not overwrite someone elses work by force pushing.
 
-# TypeScript: Declaration merging, module augmentation
+# TypeScript 
+
+## Declaration merging, module augmentation
 
 ```ts
 interface Foo { foo: string }
@@ -337,7 +339,7 @@ type Foo = { foo: string }
 type Foo = { bar: string } // Error
 ```
 
-# TypeScript: Index signature
+## Index signature
 
 Interfaces need an explicit index signature while types have an implicit one.
 
@@ -368,3 +370,15 @@ type MyStyles = {
   footer: string;
 }
 ```
+
+## Interfaces vs Types
+
+Use interfaces where you can.
+
+- They look better in error messages (although it might be subjective)
+- They require explicit index signatures
+- Extending is better than intersections (you cannot accidentally override a property). By doing intersections you might accidentally run into a situation where a value must of of empty type like `string & number`.
+- They can be augmented when necessary (good for library authors)
+- Smaller memory footprint (because they are lazy and cacheable)
+
+:arrow_right: https://paper.dropbox.com/doc/WTF-TypeScript--Axf2A4Kth5vPl9RXElMtHExCAg-fyxWXDfqYssUzsAzmGmZL
