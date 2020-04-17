@@ -382,3 +382,30 @@ Use interfaces where you can.
 - Smaller memory footprint (because they are lazy and cacheable)
 
 :arrow_right: https://paper.dropbox.com/doc/WTF-TypeScript--Axf2A4Kth5vPl9RXElMtHExCAg-fyxWXDfqYssUzsAzmGmZL
+
+# React `useCallback`
+
+Apply `useCallback()` to preserve the callback instance between renderings
+
+```jsx
+const MemoizedLogout = React.memo(Logout);
+
+function MyApp({ store, cookies }) {
+  const onLogout = useCallback(
+    () => cookies.clear('session'), 
+    [cookies]
+  );
+
+  return (
+    <div className="main">
+      <header>
+        <MemoizedLogout
+          username={store.username}
+          onLogout={onLogout}
+        />
+      </header>
+      {store.content}
+    </div>
+  );
+}
+```
