@@ -409,3 +409,194 @@ function MyApp({ store, cookies }) {
   );
 }
 ```
+
+# TypeScript
+
+## Object vs object
+
+`Object` is the type of all instances of class `Object` (includes primitive values, describes functionality that is common to all JavaScript objects).
+
+`object` is the type of all non-primitive values.
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#object-versus-object
+
+## Interface Signatures Overview
+
+```ts
+interface ExampleInterface {
+  myProperty: boolean; // Property signature
+  myMethod(x: string): void; // Method signature
+  [prop: string]: any; // Index signature
+  (x: number): string; // Call signature
+  new (x: string): ExampleInstance; // Construct signature
+}
+```
+
+**Index Signature** helps to describe Arrays or objects that are used as dictionaries.
+
+**Call Signature** enables interfaces to describe functions, `this` is the optional calling context of the function.
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#interface-signatures-overview
+
+## Mapped Types
+
+### `typeof`
+
+```ts
+const data = ["text 1", "text 2"] as const;
+type Data = typeof data[number]; // "text 1" | "text 2"
+```
+
+```ts
+const locales = [
+  {
+    locale: "se",
+    language: "Swedish"
+  },
+  {
+    locale: "en",
+    language: "English"
+  }
+] as const;
+type Locale = typeof locales[number]["locale"]; // "se" | "en"
+```
+
+### `keyof`
+
+```ts
+const currencySymbols = {
+  GBP: "£",
+  USD: "$",
+  EUR: "€"
+};
+type CurrencySymbol = keyof typeof currencySymbols; // "GBP" | "USD" | "EUR"
+```
+
+`keyof` with generics and interfaces example:
+
+```ts
+interface HasPhoneNumber {
+  name: string;
+  phone: number;
+}
+
+interface HasEmail {
+  name: string;
+  email: string;
+}
+
+interface CommunicationMethods {
+  email: HasEmail;
+  phone: HasPhoneNumber;
+  fax: { fax: number };
+}
+
+function contact<K extends keyof CommunicationMethods>(
+  method: K,
+  contact: CommunicationMethods[K] // turning key into value - a mapped type
+) {
+  //...
+}
+contact("email", { name: "foo", email: "mike@example.com" });
+contact("phone", { name: "foo", phone: 3213332222 });
+contact("fax", { fax: 1231 });
+```
+
+We can get all values by mapping through all keys:
+
+```ts
+type AllCommKeys = keyof CommunicationMethods;
+type AllCommValues = CommunicationMethods[keyof CommunicationMethods];
+```
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#mapped-types---getting-types-from-data
+
+## readonly Array / Tuple
+
+```ts
+const array: readonly string[];
+const tuple: readonly [string, string];
+```
+
+## `const` assertions
+
+- `number` becomes number literal: `let x = 10 as const`
+- array literals become `readonly` tuples: `let y = [10, 20] as const`
+- object literals get `readonly` properties
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#const-assertions
+
+## `never`
+
+`never` represents the type of values that never occur. It is used in the following two places:
+
+- as the return type of functions that never return
+- as the type of variables under type guards that are never true
+
+```ts
+function controlFlowAnalysisWithNever(value: string | number) {
+  if (typeof value === "string") {
+    value; // Type string
+  } else if (typeof value === "number") {
+    value; // Type number
+  } else {
+    value; // Type never
+  }
+}
+```
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#never
+
+## `unknown`
+
+`unknown` is the type-safe counterpart of the `any` type: we have to do some form of checking before performing most operations on values of type unknown.
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#unknown
+
+## Advanced Factory using `ConstructorParameters<T>` and `InstanceType<T>`
+
+```ts
+class Hero {
+  constructor(public point: [number, number]) {}
+}
+
+const entities = [];
+
+const entityFactory = <
+  T extends {
+    new (...args: any[]): any;
+  }
+>(
+  classToCreate: T,
+  numberOf: number,
+  ...args: ConstructorParameters<T>
+): InstanceType<T>[] =>
+  [...Array(numberOf)].map(() => new classToCreate(...args));
+
+entities.push(...entityFactory(Hero, 10, [12, 10]));
+```
+
+## Discriminated Unions
+
+A data structure used to hold a value that could take on several different, but fixed, types.
+
+## Assertion function - check for a condition
+
+```ts
+function assert(condition: any, msg?: string): asserts condition {
+  if (!condition) {
+    throw new AssertionError(msg);
+  }
+}
+
+function yell(str) {
+  assert(typeof str === "string");
+
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: Property 'toUppercase' does not exist on type 'string'.
+  //        Did you mean 'toUpperCase'?
+}
+```
+
+:arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#assertion-function-style-1---check-for-a-condition
