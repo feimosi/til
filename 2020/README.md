@@ -600,3 +600,17 @@ function yell(str) {
 ```
 
 :arrow_right: https://github.com/David-Else/modern-typescript-with-examples-cheat-sheet#assertion-function-style-1---check-for-a-condition
+
+# `textContent` vs `innerText`
+
+1. `innerText` was non-standard, while `textContent` was standardized earlier.
+2. `innerText` returns the visible text contained in a node, while `textContent` returns the full text. 
+For example `<span>Hello <span style="display: none;">World</span></span>`, 
+  - `innerText` will return 'Hello', 
+  - `textContent` will return 'Hello World'.
+3. As a result, `innerText` is much more performance-heavy: it requires layout information to return the result.
+4. `innerText` is defined only for `HTMLElement` objects, while `textContent` is defined for all `Node` objects.
+5. `innerText` will turn `<br>` elements into newline characters, while `textContent` will just ignore them. So 2 words with only a `<br>` element between them (and no spaces) will be concatenated when using `textContent`.
+6. If you change the `text-transform` of an element by CSS, it will affect the result of `innerText`, but not the result of `textContent`. For example `<div style="text-transform: uppercase;">Hello World</div>` 
+  - `innerText`will be "HELLO WORLD", 
+  - `textContent` will be "Hello World"
