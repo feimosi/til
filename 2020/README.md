@@ -614,3 +614,9 @@ For example `<span>Hello <span style="display: none;">World</span></span>`,
 6. If you change the `text-transform` of an element by CSS, it will affect the result of `innerText`, but not the result of `textContent`. For example `<div style="text-transform: uppercase;">Hello World</div>` 
   - `innerText`will be "HELLO WORLD", 
   - `textContent` will be "Hello World"
+
+## Convert images to PDF
+
+```sh
+convert -quality 70 *.jpg document.pdf
+```
