@@ -620,3 +620,9 @@ For example `<span>Hello <span style="display: none;">World</span></span>`,
 ```sh
 convert -quality 70 *.jpg document.pdf
 ```
+
+## Delete keys from Redis by pattern
+
+```sh
+redis-cli KEYS "bull:Import*" | xargs redis-cli DEL
+```
