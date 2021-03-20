@@ -174,3 +174,20 @@ type KindlessCircle = RemoveKindField<Circle>;
 //       radius: number;
 //   }
 ```
+
+# [React] Extending HTML components with `React.ComponentProps`
+
+```tsx
+interface NewProps {
+  variant: 'primary' | 'secondary'
+  size: 'default' | 'small' | 'large'
+}
+
+type Props = NewProps
+  & Omit<React.ComponentProps<"button">, keyof NewProps>
+
+const Button = ({ variant, size, ...buttonProps }: Props) => {
+  // do stuff with variant & size
+  return <button {...buttonProps} />
+}
+```
