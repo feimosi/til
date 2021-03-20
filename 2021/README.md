@@ -10,3 +10,18 @@ JavaScript provides three different value-comparison operations:
 - `===` - Strict Equality Comparison ("strict equality", "identity", "triple equals")
 - `==` - Abstract Equality Comparison ("loose equality", "double equals")
 - `Object.is` provides SameValue (new in ES2015).
+
+# [TypeScript] Enum reverse mappings
+
+In addition to creating an object with property names for members, numeric enums members also get a reverse mapping from enum values to enum names.  
+An enum is compiled into an object that stores both forward (name -> value) and reverse (value -> name) mappings. 
+
+
+```ts
+enum Enum {
+  A,
+}
+
+Enum[A] // 0
+Enum[Enum.A] // A
+```
