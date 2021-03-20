@@ -25,3 +25,35 @@ enum Enum {
 Enum[A] // 0
 Enum[Enum.A] // A
 ```
+
+# [TypeScript] Const Enums
+
+In most cases, enums are a perfectly valid solution. However sometimes requirements are tighter. To avoid paying the cost of extra generated code and additional indirection when accessing enum values, it’s possible to use const enums. Const enums can only use constant enum expressions and unlike regular enums they are completely removed during compilation.
+
+```ts
+const enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+let directions = [
+  Direction.Up,
+  Direction.Down,
+  Direction.Left,
+  Direction.Right,
+];
+```
+
+in generated code will become
+
+```js
+"use strict";
+let directions = [
+    0 /* Up */,
+    1 /* Down */,
+    2 /* Left */,
+    3 /* Right */,
+];
+```
