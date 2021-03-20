@@ -9,7 +9,9 @@ There are four equality algorithms in ES2015:
 JavaScript provides three different value-comparison operations:
 - `===` - Strict Equality Comparison ("strict equality", "identity", "triple equals")
 - `==` - Abstract Equality Comparison ("loose equality", "double equals")
-- `Object.is` provides SameValue (new in ES2015).
+- `Object.is` provides SameValue (new in ES2015). `+0` doesn't equal `-0` and `NaN` equals `NaN`
+
+➡ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
 
 # [TypeScript] Enum reverse mappings
 
