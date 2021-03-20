@@ -132,3 +132,45 @@ let MyShape = makeSubclassWithArea(Shape);
 TypeScript 4.1 ships with a new flag called `--noUncheckedIndexedAccess`. Under this new mode, every property access (like `foo.bar`) or indexed access (like `foo["bar"]`) is considered potentially undefined. That means that in our last example, `opts.yadda` will have the type `string | number | undefined` as opposed to just `string | number`. If you need to access that property, you’ll either have to check for its existence first or use a non-null assertion operator (the postfix `!` character).
 
 ➡ https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#checked-indexed-accesses---nouncheckedindexedaccess
+
+# [TypeScript] Key Remapping in Mapped Types
+
+TypeScript 4.1 allows you to re-map keys in mapped types with a new as clause.
+With this new as clause, you can leverage features like template literal types to easily create property names based off of old ones.
+
+```ts
+type Getters<T> = {
+    [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
+};
+
+interface Person {
+    name: string;
+    age: number;
+    location: string;
+}
+
+type LazyPerson = Getters<Person>;
+//   ^ = type LazyPerson = {
+//       getName: () => string;
+//       getAge: () => number;
+//       getLocation: () => string;
+//   }
+```
+and you can even filter out keys by producing never. That means you don’t have to use an extra Omit helper type in some cases.
+
+```ts
+// Remove the 'kind' property
+type RemoveKindField<T> = {
+    [K in keyof T as Exclude<K, "kind">]: T[K]
+};
+
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type KindlessCircle = RemoveKindField<Circle>;
+//   ^ = type KindlessCircle = {
+//       radius: number;
+//   }
+```
