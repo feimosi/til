@@ -57,3 +57,42 @@ let directions = [
     3 /* Right */,
 ];
 ```
+
+# [TypeScript] `unknown` vs `any`
+
+With an unknown type we cannot reassign it to a different type, manipulate it, or pass it to another function that has a specified type:
+
+```ts
+const numberData: number = unknownData
+// ❌ Type 'unknown' is not assignable
+// to type 'number'.
+
+const stringData = unknownData.toString()
+// ❌ Object is of type 'unknown'.
+
+const dataKeys = Object.keys(unknownData)
+// ❌ Argument of type 'unknown' is not
+// assignable to parameter of type 'object'.
+
+const dataBool = unknownData as boolean
+// ⚠️ Type assertions workaround typing
+// but could result in runtime issues
+```
+
+> The reason why we were able to pass data to JSON.stringify() is because the type of the value it accepts is actually any. An unknown value can be passed to an any type.
+
+The any type on the other hand allows us to do anything with a value including access arbitrary properties, even ones that don’t exist. We’re basically reverting back to plain ol’ JavaScript at this point.
+
+```ts
+const numberData: number = anyData
+// 😨 No error
+
+const stringData = anyData.toString()
+// 😨 No error calling `.toString()`
+
+const dataKeys = Object.keys(anyData)
+// 😨 No error, let's hope `anyData`
+// is an `object`
+```
+
+➡ https://www.benmvp.com/blog/when-use-typescript-unknown-versus-any/
