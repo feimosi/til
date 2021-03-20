@@ -96,3 +96,39 @@ const dataKeys = Object.keys(anyData)
 ```
 
 ➡ https://www.benmvp.com/blog/when-use-typescript-unknown-versus-any/
+
+# [TypeScript] abstract constructor signatures
+
+TypeScript 4.2 allows you to specify an abstract modifier on constructor signatures.
+
+Adding the abstract modifier to a construct signature signals that you can pass in abstract constructors. It doesn’t stop you from passing in other classes/constructor functions that are “concrete” - it really just signals that there’s no intent to run the constructor directly, so it’s safe to pass in either class type.
+
+```ts
+abstract class Shape {
+  abstract getArea(): number;
+}
+
+interface HasArea {
+    getArea(): number;
+}
+
+let Ctor: abstract new () => HasArea = Shape;
+
+function makeSubclassWithArea(Ctor: new () => HasArea) {
+  return class extends Ctor {
+    getArea() {
+      return 42
+    }
+  };
+}
+
+let MyShape = makeSubclassWithArea(Shape);
+```
+
+➡ https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-2.html#abstract-construct-signatures
+
+# [TypeScript] `--noUncheckedIndexedAccess`
+
+TypeScript 4.1 ships with a new flag called `--noUncheckedIndexedAccess`. Under this new mode, every property access (like `foo.bar`) or indexed access (like `foo["bar"]`) is considered potentially undefined. That means that in our last example, `opts.yadda` will have the type `string | number | undefined` as opposed to just `string | number`. If you need to access that property, you’ll either have to check for its existence first or use a non-null assertion operator (the postfix `!` character).
+
+➡ https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#checked-indexed-accesses---nouncheckedindexedaccess
