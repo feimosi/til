@@ -63,7 +63,7 @@ console.log(powerOf2(3)); // 3^2 = 9
 
 # TypeScript: Type predicates
 
-Type predicates in TypeScript help you narrowing down your types based on conditionals. They’re similar to type guards, but work on functions. They way the work is, if a function returns true, change the type of the paramter to something more useful.
+Type predicates in TypeScript help you narrowing down your types based on conditionals. They’re similar to type guards, but work on functions. The way they work is, if a function returns true, change the type of the paramter to something more useful.
 
 ```ts
 function isString(s): s is string {
