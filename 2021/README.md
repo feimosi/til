@@ -193,3 +193,82 @@ const Button = ({ variant, size, ...buttonProps }: Props) => {
   return <button {...buttonProps} />
 }
 ```
+
+# [TypeScript] Variadic Tuple Types
+
+```ts
+function tail<T extends any[]>(arr: readonly [any, ...T]) {
+    const [_ignored, ...rest] = arr;
+    return rest;
+}
+
+const myTuple = [1, 2, 3, 4] as const;
+const myArray = ["hello", "world"];
+
+// type [2, 3, 4]
+const r1 = tail(myTuple);
+
+// type [2, 3, 4, ...string[]]
+const r2 = tail([...myTuple, ...myArray] as const);
+```
+
+```ts
+type Arr = readonly any[];
+
+function concat<T extends Arr, U extends Arr>(arr1: T, arr2: U): [...T, ...U] {
+    return [...arr1, ...arr2];
+}
+```
+
+# [TypeScript] Labeled Tuple Elements
+
+```ts
+type Range = [start: number, end: number];
+
+type Foo = [first: number, second?: string, ...rest: any[]];
+```
+
+# [TypeScript] compound assignment operators
+
+```ts
+let values: string[];
+
+// Before
+(values ?? (values = [])).push("hello");
+
+// After
+(values ??= []).push("hello");
+```
+
+```ts
+obj.prop ||= foo();
+
+// roughly equivalent to either of the following
+
+obj.prop || (obj.prop = foo());
+
+if (!obj.prop) {
+    obj.prop = foo();
+}
+```
+
+# [TypeScript] unknown on catch Clause Bindings
+
+TypeScript 4.0 now lets you specify the type of catch clause variables as unknown instead. unknown is safer than any because it reminds us that we need to perform some sorts of type-checks before operating on our values.
+
+```ts
+try {
+    // ...
+}
+catch (e: unknown) {
+    // error!
+    // Property 'toUpperCase' does not exist on type 'unknown'.
+    console.log(e.toUpperCase());
+
+    if (typeof e === "string") {
+        // works!
+        // We've narrowed 'e' down to the type 'string'.
+        console.log(e.toUpperCase());
+    }
+}
+```
