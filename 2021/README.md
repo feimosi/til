@@ -272,3 +272,48 @@ catch (e: unknown) {
     }
 }
 ```
+
+# AbortController
+
+AbortController is a global utility class used to signal cancelation in selected Promise-based APIs, based on the AbortController Web API. It allows you to abort one or more Web requests as and when desired.
+
+When the fetch request is initiated, we pass in the AbortSignal as an option inside the request's options object (see {signal}, below). This associates the signal and controller with the fetch request and allows us to abort it by calling AbortController.abort(), as seen below in the second event listener.
+
+```ts
+const controller = new AbortController();
+const signal = controller.signal;
+
+const abortBtn = document.querySelector('.abort');
+
+abortBtn.addEventListener('click', () => {
+  controller.abort();
+});
+
+function fetchVideo() {
+  ...
+  fetch(url, {signal}).then(function(response) {
+    ...
+  }).catch(function(e) {
+    reports.textContent = 'Download error: ' + e.message;
+  })
+}
+```
+
+> Note: When abort() is called, the fetch() promise rejects with a DOMException named AbortError.
+
+# AggregateError
+
+The AggregateError object represents an error when several errors need to be wrapped in a single error. It is thrown when multiple errors need to be reported by an operation, for example by Promise.any(), when all promises passed to it reject.
+
+```ts
+try {
+  throw new AggregateError([
+    new Error("some error"),
+  ], 'Hello');
+} catch (e) {
+  console.log(e instanceof AggregateError); // true
+  console.log(e.message);                   // "Hello"
+  console.log(e.name);                      // "AggregateError"
+  console.log(e.errors);                    // [ Error: "some error" ]
+}
+```
