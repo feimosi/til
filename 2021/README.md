@@ -423,4 +423,16 @@ Any communication between two or more components of a data center, or even commu
 
 # North-South traffic
 Any communication between components of a data center and another system, which is physically out of the boundary of the data center, is referred to as north-south traffic. In simpler words, it is any traffic coming to a data center, or going out of it to another system. That other system can be simply a client requesting access to a web application (as mentioned above).
+
+# REST
   
+REST defines 6 architectural constraints which make any web service – a true RESTful API.
+
+1. Uniform interface
+1. Client–server
+1. Stateless
+1. Cacheable
+1. Layered system
+1. Code on demand (optional)
+  
+➡ https://restfulapi.net/rest-architectural-constraints/
