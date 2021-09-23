@@ -376,3 +376,44 @@ Embedded content is a subset of flow content that imports another resource or in
 ## [Interactive content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#interactive_content)
 
 Interactive content is a subset of flow content that includes elements that are specifically designed for user interaction.
+
+# JWT
+  
+  In its compact form, JSON Web Tokens consist of three parts separated by dots (.), which are:
+
+- Header
+- Payload
+- Signature
+  
+The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
+  
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+  
+  Then, this JSON is Base64Url encoded to form the first part of the JWT.
+
+The second part of the token is the payload, which contains the claims. Claims are statements about an entity (typically, the user) and additional data. There are three types of claims: registered, public, and private claims.
+
+- Registered claims: These are a set of predefined claims which are not mandatory but recommended, to provide a set of useful, interoperable claims. Some of them are: iss (issuer), exp (expiration time), sub (subject), aud (audience), and others.
+  
+- Public claims: These can be defined at will by those using JWTs. But to avoid collisions they should be defined in the IANA JSON Web Token Registry or be defined as a URI that contains a collision resistant namespace.
+
+- Private claims: These are the custom claims created to share information between parties that agree on using them and are neither registered or public claims.
+
+The payload is then Base64Url encoded to form the second part of the JSON Web Token.
+
+> Do note that for signed tokens this information, though protected against tampering, is readable by anyone. Do not put secret information in the payload or header elements of a JWT unless it is encrypted.
+  
+To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
+For example if you want to use the HMAC SHA256 algorithm, the signature will be created in the following way:
+`HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)`
+
+The signature is used to verify the message wasn't changed along the way, and, in the case of tokens signed with a private key, it can also verify that the sender of the JWT is who it says it is.
+
+The output is three Base64-URL strings separated by dots that can be easily passed in HTML and HTTP environments
+  
+HMAC - Hash-based message authentication code
