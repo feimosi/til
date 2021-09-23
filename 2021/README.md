@@ -417,3 +417,10 @@ The signature is used to verify the message wasn't changed along the way, and, i
 The output is three Base64-URL strings separated by dots that can be easily passed in HTML and HTTP environments
   
 HMAC - Hash-based message authentication code
+
+# East-West traffic
+Any communication between two or more components of a data center, or even communication between different data centers, is referred to as east-west traffic. For instance, east-west traffic occurs when routers within a data center exchange table information, or when a LAN client communicates with a server in the data center.
+
+# North-South traffic
+Any communication between components of a data center and another system, which is physically out of the boundary of the data center, is referred to as north-south traffic. In simpler words, it is any traffic coming to a data center, or going out of it to another system. That other system can be simply a client requesting access to a web application (as mentioned above).
+  
