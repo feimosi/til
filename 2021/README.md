@@ -317,3 +317,62 @@ try {
   console.log(e.errors);                    // [ Error: "some error" ]
 }
 ```
+
+# HTML5 Sectioning Elements
+
+It is important to understand that many HTML5 sectioning (e.g. main,nav, aside ...) elements by default define ARIA landmarks. If HTML5 sectioning elements are used without understanding the associated landmark structure, assistive technology users will most likely be confused and less efficient in accessing content and interacting with web pages.
+
+- aside
+- footer
+- form
+- header
+- main
+- nav
+- section
+
+# `<meter>`
+
+The `<meter>` HTML element represents either a scalar value within a known range or a fractional value.
+
+Note: In `<placeholder>` unlike the `<meter>` element, the minimum value is always 0, and the min attribute is not allowed for the `<progress>` element.
+
+```html
+<meter id="fuel"
+       min="0" max="100"
+       low="33" high="66" optimum="80"
+       value="50">
+    at 50/100
+</meter>
+```
+
+# Content categories
+
+Every HTML element is a member of one or more content categories — these categories group elements that share common characteristics. This is a loose grouping (it doesn't actually create a relationship among elements of these categories), but they help define and describe the categories' shared behavior and their associated rules, especially when you come upon their intricate details. It's also possible for elements to not be a member of any of these categories.
+  
+## Flow content
+
+Flow content is a broad category that encompasses most elements that can go inside the <body> element.
+
+## Sectioning content
+
+Elements belonging to the sectioning content model create a section in the current outline that defines the scope of `<header>` elements, `<footer>` elements, and heading content
+
+Elements belonging to this category are `<article>`, `<aside>`, `<nav>`, and `<section>`.
+
+## Heading content
+
+Heading content is a subset of flow content, which defines the title of a section, whether marked by an explicit sectioning content element, or implicitly defined by the heading content itself.
+  
+Elements belonging to this category are `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>` and `<hgroup>`.
+
+## [Phrasing content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content)
+
+Phrasing content is a subset of flow content that defines the text and the markup it contains
+
+## [Embedded content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#embedded_content)
+
+Embedded content is a subset of flow content that imports another resource or inserts content from another mark-up language or namespace into the document.
+
+## [Interactive content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#interactive_content)
+
+Interactive content is a subset of flow content that includes elements that are specifically designed for user interaction.
