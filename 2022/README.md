@@ -1,16 +1,18 @@
 # [TypeScript] Indexed access type
 
 ```ts
+const sizes = ['xs', 'sm', 'md', 'lg', 'xl']
+
 type Values = {
-	[K in typeof sizes[number]]: number
+  [K in typeof sizes[number]]: number
 }
 // which is equivalent to:
 type Values = {
-	xs: number
-	sm: number
-	md: number
-	lg: number
-	xl: number
+  xs: number
+  sm: number
+  md: number
+  lg: number
+  xl: number
 }
 ```
 
