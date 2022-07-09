@@ -33,3 +33,44 @@ new Date('2022-06-06T00:00') // parsed as local: Mon Jun 06 2022 00:00:00 GMT+02
 ```
 
 ➡️ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+
+# [TypeScript] Variance Annotations for Type Parameters
+
+### Definition
+
+Covariance
+```ts
+fruit = new Fruit();
+mango = new Mango();
+
+fruit = mango;
+```
+
+Contravariance
+```ts
+function getFruitInfo(fruit: Fruit);
+function getMangoInfo(mango: Mango);
+
+getMangoInfo = getFruitInfo
+```
+___
+### TypeScript syntax
+
+If we want to make it explicit that `Getter` is covariant on `T`, we can now give it an `out` modifier.
+```ts
+type Getter<out T> = () => T;
+```
+And similarly, if we also want to make it explicit that `Setter` is contravariant on `T`, we can give it an `in` modifier.
+```ts
+type Setter<in T> = (value: T) => void;
+```
+
+`out` and `in` are used here because a type parameter’s variance depends on whether it’s used in an output or an input. Instead of thinking about variance, you can just think about if `T` is used in output and input positions.
+
+There are also cases for using both in and out.
+```ts
+interface State<in out T> {
+    get: () => T;
+    set: (value: T) => void;
+}
+```
