@@ -111,3 +111,35 @@ Adding a flag `/d` to a regular expression produces match object that records th
 // ['aaaabb', 'aaaa', 'bb', index: 0, input: 'aaaabb', groups: undefined, indices: Array(3)]
 // indices: [[0, 6], [0, 4], [4, 6]]
 ```
+
+# Filtering arrays with TypeScript type guards
+
+```ts
+const firstSquare = shapes.find((shape) => shape.type === "SQUARE");
+console.log(firstSquare?.size); // firstSquare has type Shape
+//                       ^^^^
+// Property 'size' does not exist on type 'Square | Rectangle | Circle'.
+//  Property 'size' does not exist on type 'Rectangle'.(2339)
+```
+Type guards:
+```ts
+const isSquare = (shape: Shape): shape is Square => shape.type === "SQUARE";
+```
+
+```ts
+const firstSquare = shapes.find(isSquare);
+console.log(firstSquare?.size); // firstSquare has type Square
+```
+
+Filtering:
+```ts
+const onlyCircles = shapes.filter(isCircle);
+onlyCircles.forEach((circle) => console.log(circle.radius));
+```
+
+Combining
+```
+const firstSquare = shapes.filter(isSquare).find((shape) => shape.size === 1);
+```
+
+➡️ https://www.skovy.dev/blog/typescript-filter-array-with-type-guard
