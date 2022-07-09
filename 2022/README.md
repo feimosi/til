@@ -74,3 +74,40 @@ interface State<in out T> {
     set: (value: T) => void;
 }
 ```
+
+# ES2022
+
+## `Array.prototype.at()`
+
+The `at()` method takes an integer value and returns the item at that index, allowing for positive and negative integers. Negative integers count back from the last item in the array. `array.at(-1)` for the last item.
+
+## `Object.hasOwn()`
+
+The `Object.hasOwn()` static method returns `true` if the specified object has the indicated property as its own property. If the property is inherited, or does not exist, the method returns `false`.
+
+`Object.hasOwn()` vs `Object.prototype.hasOwnProperty()`
+Firstly, it can be used with objects that have reimplemented `hasOwnProperty()`. It can also be used to test objects created using `Object.create(null)`. These do not inherit from `Object.prototype`, and so `hasOwnProperty()` is inaccessible.
+
+## `Error` `cause`
+
+`new Error(message, { cause })`
+
+`cause` is a property indicating the specific cause of the error. When catching and re-throwing an error with a more-specific or useful error message, this property can be used to pass the original error.
+
+```js
+try {
+  frameworkThatCanThrow();
+} catch (erroe) {
+  throw new Error('New error message', { cause: erroe });
+}
+```
+
+## RegExp match indices
+
+Adding a flag `/d` to a regular expression produces match object that records the start and end of each group capture (inside `indices` property).
+
+```js
+/(a+)(b+)/d.exec('aaaabb');
+// ['aaaabb', 'aaaa', 'bb', index: 0, input: 'aaaabb', groups: undefined, indices: Array(3)]
+// indices: [[0, 6], [0, 4], [4, 6]]
+```
