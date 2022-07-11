@@ -143,3 +143,14 @@ const firstSquare = shapes.filter(isSquare).find((shape) => shape.size === 1);
 ```
 
 ➡️ https://www.skovy.dev/blog/typescript-filter-array-with-type-guard
+
+# Get notified in JavaScript when a media query changes
+
+You can watch for changes on media queries with the following JavaScript code:
+```js
+window.matchMedia('(max-height: 150px)')
+    .addListener(console.log)
+```
+As a response, you get a MediaQueryListEvent which, in addition to including the original media query string, contains a property named matches which specifies whether or not the media query applies to the current page.
+
+➡️ https://umaar.com/dev-tips/223-javascript-media-query-listener/
