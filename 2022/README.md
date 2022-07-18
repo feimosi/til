@@ -154,3 +154,38 @@ window.matchMedia('(max-height: 150px)')
 As a response, you get a MediaQueryListEvent which, in addition to including the original media query string, contains a property named matches which specifies whether or not the media query applies to the current page.
 
 ➡️ https://umaar.com/dev-tips/223-javascript-media-query-listener/
+
+# Check if user has enough battery left
+
+```js
+// { level: 0.53 (53%), charging: true...}
+const {level, charging} = await navigator.getBattery();
+
+// If the device is currently charging
+// Or the battery level is more than 20%
+if (charging || level > 0.2) {
+    await import('./costly-module.js');
+}
+```
+
+# Check if the device has enough storage
+
+```js
+const {quota} = await navigator.storage.estimate();
+const fiftyMegabytesInBytes = 50 * 1e+6;
+
+if (quota > fiftyMegabytesInBytes) {
+    await import('./costly-module.js');
+}
+```
+
+# Check if the device has a good network connection
+
+```js
+// ⚠️ 4g does not mean fast!
+if (navigator.connection.effectiveType === '4g') {
+    await import('./costly-module.js');
+}
+```
+
+➡️ https://umaar.com/dev-tips/242-considerate-javascript/
