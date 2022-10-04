@@ -189,3 +189,11 @@ if (navigator.connection.effectiveType === '4g') {
 ```
 
 ➡️ https://umaar.com/dev-tips/242-considerate-javascript/
+
+# Rebase dependent branches with `–update-refs`
+
+When working on a large feature, when you break up the work across multiple branches that build on each other, use `–update-refs` when rebasing to update all dependent branches.
+
+![image](https://github.blog/wp-content/uploads/2022/09/git238-2.gif)
+
+➡️ https://github.blog/2022-10-03-highlights-from-git-2-38/#rebase-dependent-branches-with-update-refs
